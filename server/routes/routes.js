@@ -29,7 +29,7 @@ router.put("/users/followings", async (req, res) => {
     const userUnFollowSelf = await UserModel.updateOne(
       { _id: followId },
       {
-        $pull: { followers: req.body.userId},
+        $pull: { followers: req.body.userId },
       }
     );
     res.send("unfollowed");
@@ -37,13 +37,13 @@ router.put("/users/followings", async (req, res) => {
     const userFollow = await UserModel.updateOne(
       { _id: req.body.userId },
       {
-        $push: { followings: followId},
+        $push: { followings: followId },
       }
     );
     const userFollowSelf = await UserModel.updateOne(
       { _id: followId },
       {
-        $push: { followers: req.body.userId},
+        $push: { followers: req.body.userId },
       }
     );
     res.send("following");

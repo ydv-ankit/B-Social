@@ -20,7 +20,7 @@ const DBName = process.env.DBName;
 
 // connect to DB
 mongoose
-  .connect(DBURI)
+  .connect(DBURI + DBName)
   .then(() => {
     console.log("database connected");
   })
