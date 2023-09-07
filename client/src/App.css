@@ -1,0 +1,16 @@
+body{
+    background-color: #120a53;
+    color: #fff;
+}
+
+.sidebar{
+    flex:3
+}
+
+.feed{
+    flex: 5;
+}
+
+.rightbar{
+    flex: 4;
+}
