@@ -1,0 +1,37 @@
+.home {
+  border-left: 1px solid rgba(27, 60, 73, 0.775);
+  border-right: 1px solid rgba(27, 60, 73, 0.775);
+}
+
+.homeHead {
+  margin: 16px;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.homeTopbar {
+  display: flex;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(27, 60, 73, 0.775);
+}
+
+.homeForyou {
+  flex: 1;
+  padding: 20px;
+}
+
+.homeForyou:hover {
+  background-color: rgb(231, 233, 234, 0.1);
+}
+
+.homeFollowing {
+  padding: 20px;
+  flex: 1;
+}
+
+.homeFollowing:hover {
+  background-color: rgb(231, 233, 234, 0.1);
+}
