@@ -1,0 +1,54 @@
+.newPost{
+    border-bottom: 1px solid rgba(27, 60, 73, 0.775);
+}
+
+.newPostWrapper{
+    display: flex;
+}
+
+.newPostLeft{
+    margin-top: 13px;
+    margin-left: 15px;
+}
+
+.newPostRight{
+    margin: 20px 20px 30px 10px;
+    width: 100%;
+}
+
+.newPostInput input{
+    width: 96%;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 20px;
+}
+
+.newPostCreate{
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.newPostOptions{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.newPostOptions input{
+    cursor: pointer;
+    outline: none;
+    border: none;
+    padding: 6px 15px 6px 15px;
+    border-radius: 20px;
+    color: white;
+    background-color: rgb(29, 155, 240);
+}
+
+.fieldActive{
+    opacity: 1;
+}
+
+.fieldNotActive{
+    opacity: 0.5;
+}

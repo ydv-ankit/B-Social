@@ -1,0 +1,77 @@
+.posts {
+  padding: 10px;
+}
+
+.postsWrapper {
+  display: flex;
+}
+
+.postsContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.postsUserDetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.postsUserFullname {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.postsUserUsername {
+  margin-left: 5px;
+  font-size: 15px;
+  opacity: 0.6;
+}
+
+.postsUserDetailsSeperator {
+  margin-left: 7px;
+  opacity: 0.6;
+}
+
+.postsTime {
+  margin-left: 7px;
+  opacity: 0.6;
+}
+
+.postsMoreOptions {
+  order: 1;
+  opacity: 0.6;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.postsMoreOptions:hover {
+  border-radius: 30px;
+  background-color: rgba(231, 233, 234, 0.206);
+}
+
+.postsContent {
+  font-size: 16px;
+}
+
+.postsBottomActions {
+  opacity: 0.7;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.postsBottomSection {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.postsCount {
+  font-size: 14px;
+  padding: 3px 0 0 0;
+}
+
+.postsBottomSectionIcon {
+  padding: 2px;
+}

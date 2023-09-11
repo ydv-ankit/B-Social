@@ -90,9 +90,11 @@
 
 .profileName {
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 500;
+  margin-bottom: 5px;
 }
 
 .profileUsername {
   font-size: 14px;
+  opacity: 0.5;
 }
