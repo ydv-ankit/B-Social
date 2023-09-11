@@ -50,6 +50,9 @@ router.put("/users/followings", async (req, res) => {
   }
 });
 
+// ----------------------------------------------------------------------------
+// posts API
+
 router.get("/posts/:id", async (req, res) => {
   console.log(req.body);
   const user = await PostModel.find({ userId: req.body.userId });

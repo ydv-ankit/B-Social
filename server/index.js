@@ -20,13 +20,13 @@ const DBName = process.env.DBName;
 
 // connect to DB
 mongoose
-  .connect(DBURI + DBName)
+  .connect(DBURI)
   .then(() => {
     console.log("database connected");
   })
   .catch((err) => {
     console.log("database connection error...");
-    console.log(err);
+    console.log("ERROR:" + err);
   });
 
 // default homepage

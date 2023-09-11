@@ -8,8 +8,15 @@ const PostSchema = new mongoose.Schema(
     },
     content: {
       type: String,
+      required: true,
     },
     images: {
+      type: Array,
+    },
+    likes: {
+      type: Array,
+    },
+    comments: {
       type: Array,
     },
   },
@@ -47,7 +54,7 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-const UserModel = new mongoose.model("Users", UserSchema);
-const PostModel = new mongoose.model("Posts", PostSchema);
+const UserModel = new mongoose.model("users", UserSchema);
+const PostModel = new mongoose.model("posts", PostSchema);
 
 module.exports = { UserModel, PostModel };
