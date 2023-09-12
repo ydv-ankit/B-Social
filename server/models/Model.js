@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+import { genUsername } from "../utils/genUsername";
 
 const PostSchema = new mongoose.Schema(
   {
@@ -34,6 +35,9 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      default: () => {
+        genUsername();
+      },
     },
     fullname: {
       type: String,
@@ -48,6 +52,12 @@ const UserSchema = new mongoose.Schema(
     followers: {
       type: Array,
     },
+    createdAt:{
+      type: Date
+    },
+    lastSignInTime:{
+      type: Date
+    }
   },
   {
     timestamps: true,
