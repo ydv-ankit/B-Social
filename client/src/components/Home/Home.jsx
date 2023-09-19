@@ -4,6 +4,7 @@ import Posts from '../Posts/Posts';
 import './home.css'
 
 export default function Home() {
+
     return (
         <div className="home">
             <div className="homeWrapper">

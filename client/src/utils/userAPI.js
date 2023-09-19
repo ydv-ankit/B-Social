@@ -1,0 +1,35 @@
+import { getUsername } from "./getUsername";
+
+async function createUserDb(data) {
+  const profilePicture = data.user.photoURL;
+  const email = data.user.email;
+  const username = getUsername(email);
+  const fullname = data.user.displayName;
+  const createdAt = data.user.metadata.creationTime;
+  const lastSignInTime = data.user.metadata.lastSignInTime;
+  const userData = {
+    profilePicture: profilePicture,
+    firebaseUserId: data.user.uid,
+    email: email,
+    username: username,
+    fullname: fullname,
+    createdAt: createdAt,
+    lastSignInTime: lastSignInTime,
+  };
+  try {
+    const user = await fetch(process.env.REACT_APP_SERVER_URI + "users/new", {
+      method: "post",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+    console.log("error occured");
+  }
+}
+
+export { createUserDb };

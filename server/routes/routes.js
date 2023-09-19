@@ -4,14 +4,32 @@ const router = require("express").Router();
 
 // User routes
 router.post("/users/new", async (req, res) => {
-  const user = await UserModel.create(req.body);
-  res.status(200).send(user);
+  try {
+    const user = await UserModel.create(req.body);
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(400).send({ error: "error occured" });
+  }
 });
 
 router.get("/users/:email", async (req, res) => {
   const email = req.params.email;
-  const user = await UserModel.findOne({ email: email });
-  res.status(200).send(user);
+  try {
+    const user = await UserModel.findOne({ email: email });
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(400).send({ error: "not found" });
+  }
+});
+
+router.get("/users/:firebaseUserId", async (req, res) => {
+  const firebaseUserId = req.params.firebaseUserId;
+  try {
+    const user = await UserModel.findOne({ firebaseUserId: firebaseUserId });
+    res.status(200).send({ status: true });
+  } catch (err) {
+    res.status(400).send({ status: false });
+  }
 });
 
 // followings add/minus
@@ -50,8 +68,8 @@ router.put("/users/followings", async (req, res) => {
   }
 });
 
-// ----------------------------------------------------------------------------
-// posts API
+// --------------------------------------------------------------
+// Posts API
 
 router.get("/posts/:id", async (req, res) => {
   console.log(req.body);
