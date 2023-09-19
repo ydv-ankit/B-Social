@@ -40,7 +40,7 @@ export default function AuthPage() {
           <h1>Happening Now</h1>
           <h3>Join today.</h3>
           <div className="authOptions">
-            <button onClick={handleSignIn}><img src="assets/icons/google.png" alt="" /><span>Sign up with Google</span></button>
+            <button onClick={handleSignIn}><img src="assets/icons/google.png" alt="" /><span>Sign In with Google</span></button>
           </div>
           <div className="authError">
             {

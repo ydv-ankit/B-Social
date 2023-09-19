@@ -1,9 +1,39 @@
+import { useEffect } from 'react';
 import Newpost from '../Newpost/Newpost';
 import Posts from '../Posts/Posts';
+import { getStoredCookies } from '../../utils/cookies';
+import { useNavigate } from 'react-router-dom';
 
 import './home.css'
 
 export default function Home() {
+
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const cookies = getStoredCookies()
+        const regex = /userId=([^',]+)/;
+
+        let userId = null;
+
+        // Loop through the array and extract userId values
+        cookies.forEach(item => {
+            const match = item.match(regex);
+            if (match) {
+                // Push the matched userId value into the array
+                userId = match[1];
+            }
+        });
+
+        if (userId === null) {
+            navigate("/login");
+        }
+        else{
+            // fetch all posts, details
+
+        }
+    }, [])
 
     return (
         <div className="home">

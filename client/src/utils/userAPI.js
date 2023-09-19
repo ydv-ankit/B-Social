@@ -25,9 +25,7 @@ async function createUserDb(data) {
       },
       body: JSON.stringify(userData),
     });
-    console.log(user);
   } catch (error) {
-    console.log(error);
     console.log("error occured");
   }
 }
