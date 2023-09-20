@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 
 export default function Posts(props) {
 
-  // const handleGetPosts = async () =>{
-  //   const posts = await fetch(process.env.REACT_APP_SERVER_URI, )
-  // }
+  const handleGetPosts = async () => {
+    // const posts = await fetch(process.env.REACT_APP_SERVER_URI + "posts")
+  }
 
-  // useEffect(()=>{
-
-  // })
+  useEffect(() => {
+    handleGetPosts();
+  })
   return (
     <PostSection />
   )

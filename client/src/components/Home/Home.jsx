@@ -29,11 +29,7 @@ export default function Home() {
         if (userId === null) {
             navigate("/login");
         }
-        else{
-            // fetch all posts, details
-
-        }
-    }, [])
+    }, [navigate])
 
     return (
         <div className="home">
