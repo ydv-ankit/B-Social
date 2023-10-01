@@ -28,6 +28,7 @@
 
 .sidebarLinkContent:hover {
   background-color: rgb(231, 233, 234, 0.1);
+  cursor: pointer;
 }
 
 .sidebarImg {
@@ -76,6 +77,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 30px;
+}
+
+.sidebarBottomLinks:hover{
+  background-color: rgb(231, 233, 234, 0.1);
 }
 
 .profileLeft {
