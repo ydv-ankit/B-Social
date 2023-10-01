@@ -10,7 +10,7 @@ export default function PostSection(props) {
         <div className="posts">
             <div className="postsWrapper">
                 <div className="profileImg">
-                    <img src="assets/icons/twitter-x.png" alt="" />
+                    <img src={props.profilePicture} alt="" />
                 </div>
                 <div className="postsContent">
                     <div className="postsUserDetails">
@@ -36,7 +36,7 @@ export default function PostSection(props) {
                             <span className="postsBottomSectionIcon">
                                 <ChatBubbleOutlineIcon />
                             </span>
-                            <span className="postsCount">{props.likeCount}</span>
+                            <span className="postsCount">{props.commentCount}</span>
                         </span>
                         <span className="postsBottomSection">
                             <span className="postsBottomSectionIcon">
@@ -47,7 +47,7 @@ export default function PostSection(props) {
                             <span className="postsBottomSectionIcon">
                                 <FavoriteBorderIcon />
                             </span>
-                            <span className="postsCount"></span>
+                            <span className="postsCount">{props.likeCount}</span>
                         </span>
                         <span className="postsBottomSection">
                             <span className="postsBottomSectionIcon">
