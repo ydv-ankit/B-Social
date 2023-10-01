@@ -22,13 +22,13 @@ router.get("/users/:email", async (req, res) => {
   }
 });
 
-router.get("/users/:firebaseUserId", async (req, res) => {
+router.get("/users/id/:firebaseUserId", async (req, res) => {
   const firebaseUserId = req.params.firebaseUserId;
   try {
     const user = await UserModel.findOne({ firebaseUserId: firebaseUserId });
-    res.status(200).send({ status: true });
+    res.status(200).send({ data: user });
   } catch (err) {
-    res.status(400).send({ status: false });
+    res.status(400).send({ error: "not found" });
   }
 });
 
@@ -66,7 +66,7 @@ router.put("/users/followings", async (req, res) => {
           $push: { followers: req.body.userId },
         }
       );
-      res.send("following");
+      res.send("followed");
     }
   } catch (error) {
     console.log(error);
@@ -76,16 +76,18 @@ router.put("/users/followings", async (req, res) => {
 // --------------------------------------------------------------
 // Posts API
 
+// get user profile posts
 router.get("/posts/profileposts/:id", async (req, res) => {
   const userId = req.params.id;
   try {
     const posts = await PostModel.find({ userId: userId });
-    res.status(200).send({ "posts": posts });
+    res.status(200).send({ posts: posts });
   } catch (err) {
     res.status.apply(404).send({ error: "cannot get posts" });
   }
 });
 
+// get all posts of followings
 router.get("/posts/all/:id", async (req, res) => {
   const firebaseUserId = req.params.id;
   let posts = [];
