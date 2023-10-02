@@ -8,27 +8,33 @@ import EqualizerIcon from '@mui/icons-material/Equalizer';
 export default function PostSection(props) {
     return (
         <div className="posts">
+
+            {
+                // console.log(props.postTime.toString())
+            }
             <div className="postsWrapper">
                 <div className="profileImg">
-                    <img src={props.profilePicture} alt="" />
+                    <img src={props.data.profilePicture} alt="" />
                 </div>
                 <div className="postsContent">
                     <div className="postsUserDetails">
                         <div>
                             <span className="postsUserFullname">
-                                {props.fullname}
+                                {props.data.fullname}
                             </span>
                             <span className="postsUserUsername">
-                                @{props.username}
+                                @{props.data.username}
                             </span>
                             <span className="postsUserDetailsSeperator">.</span>
-                            <span className="postsTime">2h</span>
                         </div>
-                        <span className="postsMoreOptions">
-                            <MoreHorizOutlined />
-                        </span>
+                        <div className="postsTopRight">
+                            <span className="postsTime">{props.postTime.toString()}</span>
+                            <span className="postsMoreOptions">
+                                <MoreHorizOutlined />
+                            </span>
+                        </div>
                     </div>
-                    <div className="postsContent">
+                    <div className="postsInnerContent">
                         <p>{props.content}</p>
                     </div>
                     <div className="postsBottomActions">
@@ -48,12 +54,6 @@ export default function PostSection(props) {
                                 <FavoriteBorderIcon />
                             </span>
                             <span className="postsCount">{props.likeCount}</span>
-                        </span>
-                        <span className="postsBottomSection">
-                            <span className="postsBottomSectionIcon">
-                                <EqualizerIcon />
-                            </span>
-                            <span className="postsCount">{props.viewCount}</span>
                         </span>
                     </div>
                 </div>
