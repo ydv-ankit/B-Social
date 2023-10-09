@@ -1,26 +1,14 @@
 import './posts.css'
 import PostSection from '../PostSection/PostSection';
 import { useEffect, useState } from 'react';
-import { getStoredCookies } from "../../utils/cookies"
+import { getUserId } from "../../utils/cookies"
 
 let userDetails = new Map();
 export default function Posts(props) {
   const [posts, setPosts] = useState([]);
 
   const handleGetPosts = async () => {
-    const cookies = getStoredCookies();
-    const regex = /userId=([^',]+)/;
-
-    let userId = null;
-
-    // Loop through the array and extract userId values
-    cookies.forEach(item => {
-      const match = item.match(regex);
-      if (match) {
-        // Push the matched userId value into the array
-        userId = match[1];
-      }
-    });
+    const userId = getUserId();
 
     try {
       const resp = await fetch(process.env.REACT_APP_SERVER_URI + "posts/all/" + userId);

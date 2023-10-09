@@ -3,7 +3,6 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ScreenRotationAltIcon from '@mui/icons-material/ScreenRotationAlt';
-import EqualizerIcon from '@mui/icons-material/Equalizer';
 
 export default function PostSection(props) {
     return (
