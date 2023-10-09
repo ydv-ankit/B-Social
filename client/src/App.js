@@ -4,8 +4,6 @@ import AuthPage from "./components/auth/AuthPage";
 import Home from "./components/Home/Home";
 import Sidebar from "./components/sidebar/Sidebar";
 import Rightbar from "./components/rightbar/Rightbar";
-import { useEffect } from "react";
-import { getStoredCookies } from "./utils/cookies";
 
 export default function App() {
   return (
