@@ -9,16 +9,13 @@ export default function Newpost(props) {
   const [postError, setPostError] = useState("");
   const [userData, setUserData] = useState();
 
-  async function getUserData(uid) {
+  async function getUserData() {
     try {
       const tmp = await fetch(
-        process.env.REACT_APP_SERVER_URI + "users/id/" + uid
+        process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId()
       );
       const data = await tmp.json();
-      if (data.data) {
-        setUserData(data.data);
-        console.log(userData);
-      }
+      setUserData(data.data);
     } catch (error) {
       console.log("Cannot get user data !!");
     }
@@ -75,7 +72,7 @@ export default function Newpost(props) {
       <div className="newPostWrapper">
         <div className="newPostLeft">
           <div className="profileImg">
-            <img src={userData} alt="" />
+            <img src={userData && userData.profilePicture} alt="" />
           </div>
         </div>
         <div className="newPostRight">
