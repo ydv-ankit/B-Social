@@ -11,20 +11,21 @@ export default function Newpost(props) {
 
   async function getUserData() {
     try {
-      const tmp = await fetch(
-        process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId()
-      );
-      const data = await tmp.json();
-      setUserData(data.data);
+      await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
+        .then(async (tmp) => {
+          const data = await tmp.json();
+          setUserData(data.data);
+        })
+        .catch((err) => createNotification("Cannot get user data !!"));
     } catch (error) {
       console.log("Cannot get user data !!");
     }
   }
 
-  function createNotification() {
+  function createNotification(text) {
     var successDiv = document.createElement("div");
     successDiv.className = "success";
-    var textNode = document.createTextNode("Posted successfully !");
+    var textNode = document.createTextNode(text);
     successDiv.appendChild(textNode);
     document.querySelector(".newPost").appendChild(successDiv);
 
@@ -40,20 +41,19 @@ export default function Newpost(props) {
       content: postData,
     };
 
-    try {
-      const resp = await fetch(process.env.REACT_APP_SERVER_URI + "posts/new", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postObj),
-      });
-      setPostData("");
-      setIsActive(false);
-      createNotification();
-    } catch (error) {
-      setPostError("Try again later !");
-    }
+    await fetch(process.env.REACT_APP_SERVER_URI + "posts/new", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postObj),
+    })
+      .then(async (tmp) => {
+        setPostData("");
+        setIsActive(false);
+        createNotification("Posted successfully !");
+      })
+      .catch((err) => setPostError("Posting error !!"));
   };
 
   function postinput(e) {
