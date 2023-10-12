@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
 import AuthPage from "./components/auth/AuthPage";
 import Home from "./components/Home/Home";
 import Sidebar from "./components/sidebar/Sidebar";
 import Rightbar from "./components/rightbar/Rightbar";
+import Explore from "./components/explore/Explore";
+
+import "./App.css";
 
 export default function App() {
   return (
@@ -18,6 +20,17 @@ export default function App() {
                 <>
                   <Sidebar />
                   <Home />
+                  <Rightbar />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/explore"
+              element={
+                <>
+                  <Sidebar />
+                  <Explore />
                   <Rightbar />
                 </>
               }
