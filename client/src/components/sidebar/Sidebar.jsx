@@ -10,11 +10,32 @@ import {
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { getUserId } from '../../utils/cookies';
 
 import "./sidebar.css";
 
 export default function Sidebar() {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState();
+
+  async function getUserData() {
+    try {
+      await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
+        .then(async (tmp) => {
+          const data = await tmp.json();
+          setUserData(data.data);
+        })
+        .catch((err) => console.log(err));
+    } catch (error) {
+      console.log("Cannot get user data !!");
+    }
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, [])
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -95,17 +116,17 @@ export default function Sidebar() {
             </div>
           </div>
           <div className="sidebarLinks">
-            <div className="sidebarLinkText postText"  onClick={() => navigate('/newpost')}>Post</div>
+            <div className="sidebarLinkText postText" onClick={() => navigate('/newpost')}>Post</div>
           </div>
         </div>
         <div className="sidebarBottomLinks">
           <div className="profileLeft">
             <div className="profileImg">
-              <img src="assets/icons/twitter-x.png" alt="" />
+              <img src={userData && userData.profilePicture} alt="" />
             </div>
             <div className="profileText">
-              <div className="profileName">Ankit Ydv</div>
-              <div className="profileUsername">@ydvtwts</div>
+              <div className="profileName">{userData && userData.fullname}</div>
+              <div className="profileUsername">{userData && userData.username}</div>
             </div>
           </div>
           <div className="moreOptions">
