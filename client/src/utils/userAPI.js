@@ -17,14 +17,19 @@ async function createUserDb(data) {
     lastSignInTime: lastSignInTime,
   };
   try {
-    const user = await fetch(process.env.REACT_APP_SERVER_URI + "users/new", {
-      method: "post",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
+    await fetch(process.env.REACT_APP_SERVER_URI + "users/" + email)
+      .then(async (resp) => {
+        return true;
+      }).catch(async (err) => {
+        const user = await fetch(process.env.REACT_APP_SERVER_URI + "users/new", {
+          method: "post",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        });
+      })
   } catch (error) {
     console.log("error occured");
   }
