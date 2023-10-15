@@ -11,13 +11,30 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { getUserId } from '../../utils/cookies';
+import { getUserId, removeCookies } from '../../utils/cookies';
 
 import "./sidebar.css";
 
 export default function Sidebar() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState();
+
+  function handleBottomLinkClickLogOut(e) {
+    document.getElementById("sidebarPopUp").style.display = "none";
+    removeCookies("userId");
+    navigate("/login");
+  }
+
+  function handleBottomLinkClickProfile(e) {
+    document.getElementById("sidebarPopUp").style.display = "none";
+    navigate("/profile");
+  }
+
+  function handleProfileClick(e) {
+    document.getElementById("sidebarPopUp").style.display == "none"
+      ? document.getElementById("sidebarPopUp").style.display = "block"
+      : document.getElementById("sidebarPopUp").style.display = "none";
+  }
 
   async function getUserData() {
     try {
@@ -119,18 +136,28 @@ export default function Sidebar() {
             <div className="sidebarLinkText postText" onClick={() => navigate('/newpost')}>Post</div>
           </div>
         </div>
-        <div className="sidebarBottomLinks">
-          <div className="profileLeft">
-            <div className="profileImg">
-              <img src={userData && userData.profilePicture} alt="" />
+        <div className="sidebarBottomLinks" >
+          <div className="sidebarBottomProfile" onClick={handleProfileClick}>
+            <div className="profileLeft">
+              <div className="profileImg">
+                <img src={userData && userData.profilePicture} alt="" />
+              </div>
+              <div className="profileText">
+                <div className="profileName">{userData && userData.fullname}</div>
+                <div className="profileUsername">{userData && userData.username}</div>
+              </div>
             </div>
-            <div className="profileText">
-              <div className="profileName">{userData && userData.fullname}</div>
-              <div className="profileUsername">{userData && userData.username}</div>
+            <div className="moreOptions">
+              <MoreHorizOutlined />
             </div>
           </div>
-          <div className="moreOptions">
-            <MoreHorizOutlined />
+          <div className="sidebarBottomPopUp" id="sidebarPopUp">
+            <div className="popUpText" onClick={handleBottomLinkClickProfile}>
+              Profile
+            </div>
+            <div className="popUpText" onClick={handleBottomLinkClickLogOut}>
+              Log Out
+            </div>
           </div>
         </div>
       </div>
