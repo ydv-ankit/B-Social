@@ -21,6 +21,7 @@ export default function AuthPage() {
       setLoginStatus(true);
     }).catch((err) => {
       setError("Login Failed");
+      setLoginStatus(false);
     })
   }
 
