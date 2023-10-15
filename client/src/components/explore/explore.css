@@ -1,0 +1,26 @@
+.exploreSearch{
+    display: flex;
+    background-color: grey;
+    margin: 10px;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.exploreSearch:focus{
+    color: blue;
+    background-color: red;
+}
+
+.exploreSearchIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.exploreSearchBox{
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+}
