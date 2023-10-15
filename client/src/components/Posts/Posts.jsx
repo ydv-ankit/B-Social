@@ -1,7 +1,7 @@
-import './posts.css'
 import PostSection from '../PostSection/PostSection';
 import { useEffect, useState } from 'react';
 import { getUserId } from "../../utils/cookies"
+import './posts.css'
 
 let userDetails = new Map();
 export default function Posts(props) {
@@ -31,10 +31,7 @@ export default function Posts(props) {
 
       // Wait for all fetch requests to complete
       await Promise.all(fetchPromises);
-
-      setPosts(posts);
-
-      // console.log(userDetails.get("lLdgvwFXIhMOU1zJlZAazeqMIll1"));
+      setPosts(posts.posts);
     } catch (err) {
       console.log("error fetching posts...", err);
     }
@@ -87,7 +84,7 @@ export default function Posts(props) {
               />
             );
           })
-        ) : "Loading..."
+        ) : posts.length === 0 ? <div className='noPosts'>No posts found !!</div> : <div class='noPosts'>Loading posts...</div>
       }
 
     </>
