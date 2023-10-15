@@ -19,4 +19,8 @@ function setCookies(key, value) {
   document.cookie = key + "=" + value;
 }
 
-export { setCookies, getUserId };
+function removeCookies(key) {
+  document.cookie = key + "=" + null;
+}
+
+export { setCookies, getUserId, removeCookies };
