@@ -5,7 +5,7 @@ import './posts.css'
 
 let userDetails = new Map();
 export default function Posts(props) {
-  const [posts, setPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
 
   const handleGetPosts = async () => {
     const userId = getUserId();
@@ -31,7 +31,8 @@ export default function Posts(props) {
 
       // Wait for all fetch requests to complete
       await Promise.all(fetchPromises);
-      setPosts(posts.posts);
+      setUserPosts(posts.posts);
+      console.log(userPosts);
     } catch (err) {
       console.log("error fetching posts...", err);
     }
@@ -44,8 +45,8 @@ export default function Posts(props) {
   return (
     <>
       {
-        posts && posts.posts ? (
-          posts.posts.map((element) => {
+        userPosts ? (
+          userPosts.map((element, _) => {
 
             const createdAt = element.createdAt; // Replace with your actual timestamp
             const createdAtDate = new Date(createdAt);
@@ -75,7 +76,7 @@ export default function Posts(props) {
 
             return (
               <PostSection
-                key={element.userId}
+                key={_}
                 postTime={time}
                 data={userDetails.get("lLdgvwFXIhMOU1zJlZAazeqMIll1")}
                 content={element.content}
@@ -84,7 +85,7 @@ export default function Posts(props) {
               />
             );
           })
-        ) : posts.length === 0 ? <div className='noPosts'>No posts found !!</div> : <div className='noPosts'>Loading posts...</div>
+        ) : <div className='noPosts'>No posts found !!</div>
       }
 
     </>
