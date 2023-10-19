@@ -13,9 +13,11 @@ export default function App() {
       <div className="container">
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<AuthPage />} />
+            <Route path="/login" element={<AuthPage />} />
             <Route
               exact
-              path="/"
+              path="/home"
               element={
                 <>
                   <Sidebar />
@@ -35,7 +37,6 @@ export default function App() {
                 </>
               }
             />
-            <Route path="/login" element={<AuthPage />} />
           </Routes>
         </BrowserRouter>
       </div>
