@@ -16,7 +16,7 @@ router.get("/users/:email", async (req, res) => {
   const email = req.params.email;
   try {
     const user = await UserModel.findOne({ email: email });
-    res.status(200).send(user);
+    res.status(200).send({status: user});
   } catch (err) {
     res.status(400).send({ error: "not found" });
   }
@@ -52,7 +52,7 @@ router.put("/users/followings", async (req, res) => {
           $pull: { followers: req.body.userId },
         }
       );
-      res.send("unfollowed");
+      res.send({ status: "unfollowed" });
     } else {
       const userFollow = await UserModel.updateOne(
         { firebaseUserId: req.body.userId },
@@ -66,7 +66,7 @@ router.put("/users/followings", async (req, res) => {
           $push: { followers: req.body.userId },
         }
       );
-      res.send("followed");
+      res.send({ status: "followed" });
     }
   } catch (error) {
     console.log(error);
@@ -109,7 +109,7 @@ router.get("/posts/all/:id", async (req, res) => {
     }
     res.status(200).send({ posts: posts });
   } catch (err) {
-    res.status.apply(400).send({ error: "cannot get posts" });
+    res.status(400).send({ error: "cannot get posts" });
   }
 });
 
@@ -117,7 +117,7 @@ router.post("/posts/new", async (req, res) => {
   console.log(req.body);
   const post = await PostModel.create(req.body);
   console.log(post);
-  res.send(post);
+  res.send({ post: post });
 });
 
 module.exports = router;

@@ -32,6 +32,7 @@ async function createUserDb(data) {
       })
   } catch (error) {
     console.log("error occured");
+    return false;
   }
 }
 

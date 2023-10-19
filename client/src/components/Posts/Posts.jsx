@@ -84,7 +84,7 @@ export default function Posts(props) {
               />
             );
           })
-        ) : posts.length === 0 ? <div className='noPosts'>No posts found !!</div> : <div class='noPosts'>Loading posts...</div>
+        ) : posts.length === 0 ? <div className='noPosts'>No posts found !!</div> : <div className='noPosts'>Loading posts...</div>
       }
 
     </>

@@ -22,7 +22,7 @@ export default function Sidebar() {
   function handleBottomLinkClickLogOut(e) {
     document.getElementById("sidebarPopUp").style.display = "none";
     removeCookies("userId");
-    navigate("/login");
+    navigate("/");
   }
 
   function handleBottomLinkClickProfile(e) {
@@ -31,19 +31,16 @@ export default function Sidebar() {
   }
 
   function handleProfileClick(e) {
-    document.getElementById("sidebarPopUp").style.display == "none"
+    document.getElementById("sidebarPopUp").style.display === "none"
       ? document.getElementById("sidebarPopUp").style.display = "block"
       : document.getElementById("sidebarPopUp").style.display = "none";
   }
 
   async function getUserData() {
     try {
-      await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
-        .then(async (tmp) => {
-          const data = await tmp.json();
-          setUserData(data.data);
-        })
-        .catch((err) => console.log(err));
+      const resp = await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId(), { method: "get" })
+      const data = await resp.json();
+      setUserData(data.data);
     } catch (error) {
       console.log("Cannot get user data !!");
     }
@@ -140,7 +137,7 @@ export default function Sidebar() {
           <div className="sidebarBottomProfile" onClick={handleProfileClick}>
             <div className="profileLeft">
               <div className="profileImg">
-                <img src={userData && userData.profilePicture} alt="" />
+                <img src={userData && userData.profilePicture} alt="userprofile" />
               </div>
               <div className="profileText">
                 <div className="profileName">{userData && userData.fullname}</div>

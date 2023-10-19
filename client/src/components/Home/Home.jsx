@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const userId = getUserId();
     if (userId === null) {
-      navigate("/login");
+      navigate("/");
     }
   }, [navigate]);
 
