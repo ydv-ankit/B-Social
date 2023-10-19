@@ -133,8 +133,8 @@ export default function Sidebar() {
             <div className="sidebarLinkText postText" onClick={() => navigate('/newpost')}>Post</div>
           </div>
         </div>
-        <div className="sidebarBottomLinks" >
-          <div className="sidebarBottomProfile" onClick={handleProfileClick}>
+        <div className="sidebarBottomLinks" onClick={handleProfileClick}>
+          <div className="sidebarBottomProfile" >
             <div className="profileLeft">
               <div className="profileImg">
                 <img src={userData && userData.profilePicture} alt="userprofile" />

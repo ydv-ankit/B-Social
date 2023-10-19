@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getUserId } from "../../utils/cookies"
 import './posts.css'
 
-let userDetails = new Map();
+const userDetails = [];
 export default function Posts(props) {
   const [userPosts, setUserPosts] = useState([]);
 
@@ -26,13 +26,12 @@ export default function Posts(props) {
       const fetchPromises = data.map(async (id) => {
         const resp = await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + id);
         const get_resp_data = await resp.json();
-        userDetails.set(id, get_resp_data.data);
+        userDetails.push(get_resp_data.data);
       });
 
       // Wait for all fetch requests to complete
       await Promise.all(fetchPromises);
       setUserPosts(posts.posts);
-      console.log(userPosts);
     } catch (err) {
       console.log("error fetching posts...", err);
     }
@@ -73,12 +72,12 @@ export default function Posts(props) {
               // days to date
               time = createdAtDate.toString().substring(4, 24);
             }
-
+            
             return (
               <PostSection
                 key={_}
                 postTime={time}
-                data={userDetails.get("lLdgvwFXIhMOU1zJlZAazeqMIll1")}
+                data={userDetails[0]}
                 content={element.content}
                 commentCount={element.comments.length}
                 likeCount={element.likes.length}
