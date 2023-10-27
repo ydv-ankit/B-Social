@@ -16,6 +16,7 @@ export default function AuthPage() {
 
   async function handleSignIn() {
     signInWithPopup(auth, googleAuth).then((data) => {
+      console.log(data);
       createUserDb(data);
       setCookies("userId", data.user.uid);
       setLoginStatus(true);

@@ -40,6 +40,7 @@ export default function Sidebar() {
     try {
       const resp = await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId(), { method: "get" })
       const data = await resp.json();
+      console.log(data)
       setUserData(data.data);
     } catch (error) {
       console.log("Cannot get user data !!");

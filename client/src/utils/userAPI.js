@@ -16,12 +16,9 @@ async function createUserDb(data) {
     createdAt: createdAt,
     lastSignInTime: lastSignInTime,
   };
+  console.log(userData);
   try {
-    await fetch(process.env.REACT_APP_SERVER_URI + "users/" + email)
-      .then(async (resp) => {
-        return true;
-      }).catch(async (err) => {
-        const user = await fetch(process.env.REACT_APP_SERVER_URI + "users/new", {
+    const user = await fetch(process.env.REACT_APP_SERVER_URI + "users/new", {
           method: "post",
           mode: "cors",
           headers: {
@@ -29,7 +26,7 @@ async function createUserDb(data) {
           },
           body: JSON.stringify(userData),
         });
-      })
+     
   } catch (error) {
     console.log("error occured");
     return false;
