@@ -19,6 +19,9 @@ const PostSchema = new mongoose.Schema(
     comments: {
       type: Array,
     },
+    retweets: {
+      type: Array
+    }
   },
   {
     timestamps: true,

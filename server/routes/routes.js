@@ -167,4 +167,30 @@ router.get("/post/like/:userId/:postId", async (req, res) => {
 
 })
 
+router.get("/post/retweet/:userId/:postId", async (req, res) => {
+  async function createRetweetPost(data) {
+    console.log(data);
+    await PostModel.create(data)
+      .then(async (resp) => {
+        await PostModel.findByIdAndUpdate(req.params.postId, { $push: { retweets: req.params.userId } })
+          .then((a) => {
+            return true
+          }).catch((error) => {
+            return false;
+          })
+      })
+      .catch((err) => { return false })
+  }
+
+  await PostModel.findOne({ _id: req.params.postId })
+    .then((resp) => {
+      resp.userId = req.params.userId;
+      const { userId, content, images } = resp;
+      createRetweetPost({ userId, content, images });
+      res.status(200).send({ "status": "retweeted" })
+    }).catch((err) => {
+      res.status(401).send({ "status": "error occured" })
+    })
+})
+
 module.exports = router;
