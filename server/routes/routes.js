@@ -16,7 +16,7 @@ router.get("/users/:email", async (req, res) => {
   const email = req.params.email;
   try {
     const user = await UserModel.findOne({ email: email });
-    res.status(200).send({status: user});
+    res.status(200).send({ status: user });
   } catch (err) {
     res.status(400).send({ error: "not found" });
   }
@@ -119,5 +119,49 @@ router.post("/posts/new", async (req, res) => {
   console.log(post);
   res.send({ post: post });
 });
+
+// like dislike
+router.get("/post/like/:userId/:postId", async (req, res) => {
+  const userId = req.params.userId;
+  const postId = req.params.postId;
+
+  async function updateLike(userId, postId) {
+    await PostModel.updateOne({ _id: postId }, { $push: { likes: userId } })
+      .then((resp) => {
+        return true;
+      }).catch((err) => {
+        console.log("error: cannot like/dislike" + err);
+        return false;
+      })
+  }
+
+
+  async function updateDislike(userId, postId) {
+    await PostModel.updateOne({ _id: postId }, { $pull: { likes: userId } })
+      .then((resp) => {
+        return true;
+      }).catch((err) => {
+        console.log("error: cannot like/dislike" + err);
+        return false;
+      })
+  }
+
+  await PostModel.findOne({ _id: postId })
+    .then((resp) => {
+      if (resp.likes.includes(userId)) {
+        updateDislike(userId, postId);
+        res.send({ "status": "disliked" })
+      }
+      else {
+        updateLike(userId, postId);
+        res.send({ "status": "liked" })
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send({ "status": "cannot set like/dislike" });
+    })
+
+})
 
 module.exports = router;

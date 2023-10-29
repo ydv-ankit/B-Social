@@ -72,13 +72,19 @@ export default function Posts(props) {
               // days to date
               time = createdAtDate.toString().substring(4, 24);
             }
-            
+
+            // console.log(element.likes);
+            let userId = getUserId();
+            let isLiked = element.likes.includes(userId);
+
             return (
               <PostSection
                 key={_}
+                postId={element._id}
                 postTime={time}
                 data={userDetails[0]}
                 content={element.content}
+                isLikedByUser={isLiked}
                 commentCount={element.comments.length}
                 likeCount={element.likes.length}
               />

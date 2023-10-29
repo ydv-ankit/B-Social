@@ -3,14 +3,48 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ScreenRotationAltIcon from '@mui/icons-material/ScreenRotationAlt';
+import { useState } from 'react';
+import { getUserId } from "../../utils/cookies";
 
 export default function PostSection(props) {
+    const [isLiked, setIsLiked] = useState(props.isLikedByUser);
+    const [likeCount, setLikeCount] = useState(props.likeCount);
+    const postId = props.postId;
+    const userId = getUserId();
+
+    const handleLike = async () => {
+        if (isLiked) {
+            setIsLiked(!isLiked);
+            setLikeCount(likeCount - 1);
+            await fetch(process.env.REACT_APP_SERVER_URI + "post/like/" + userId + '/' + postId)
+                .then((resp) => {
+                    return resp.json();
+                })
+                .then((data) => {
+                    return;
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+        else {
+            setIsLiked(!isLiked);
+            setLikeCount(likeCount + 1)
+            await fetch(process.env.REACT_APP_SERVER_URI + "post/like/" + userId + '/' + postId)
+                .then((resp) => {
+                    return resp.json();
+                })
+                .then((data) => {
+                    return;
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+    }
+
     return (
         <div className="posts">
-
-            {
-                // console.log(props.postTime.toString())
-            }
             <div className="postsWrapper">
                 <div className="profileImg">
                     <img src={props.data.profilePicture} alt="" />
@@ -49,10 +83,13 @@ export default function PostSection(props) {
                             </span>
                         </span>
                         <span className="postsBottomSection">
-                            <span className="postsBottomSectionIcon">
-                                <FavoriteBorderIcon />
+                            <span className="postsBottomSectionIcon" onClick={handleLike}>
+                                {isLiked
+                                    ? <FavoriteIcon />
+                                    : <FavoriteBorderIcon />
+                                }
                             </span>
-                            <span className="postsCount">{props.likeCount}</span>
+                            <span className="postsCount">{likeCount}</span>
                         </span>
                     </div>
                 </div>
