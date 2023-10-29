@@ -16,21 +16,33 @@ async function createUserDb(data) {
     createdAt: createdAt,
     lastSignInTime: lastSignInTime,
   };
-  console.log(userData);
   try {
     const user = await fetch(process.env.REACT_APP_SERVER_URI + "users/new", {
-          method: "post",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        });
-     
+      method: "post",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    return true;
   } catch (error) {
     console.log("error occured");
     return false;
   }
 }
 
-export { createUserDb };
+async function getUserData(userId) {
+  try {
+    await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + userId)
+      .then(async (tmp) => {
+        const data = await tmp.json();
+        return data.data
+      })
+      .catch((err) => { return null; })
+  } catch (error) {
+    console.log("Cannot get user data !!");
+  }
+}
+
+export { createUserDb, getUserData };

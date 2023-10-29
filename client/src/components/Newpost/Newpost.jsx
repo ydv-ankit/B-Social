@@ -12,8 +12,9 @@ export default function Newpost(props) {
   async function getUserData() {
     try {
       await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
-        .then(async (tmp) => {
-          const data = await tmp.json();
+        .then((tmp) => {
+          return tmp.json();
+        }).then((data)=>{
           setUserData(data.data);
         })
         .catch((err) => createNotification("Cannot get user data !!"));
