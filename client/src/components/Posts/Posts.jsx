@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { getUserId } from "../../utils/cookies"
 import './posts.css'
 
-const userDetails = [];
+let userDetails = [];
+
 export default function Posts(props) {
   const [userPosts, setUserPosts] = useState([]);
 
@@ -20,7 +21,7 @@ export default function Posts(props) {
       });
 
       // Remove duplicates
-      let data = Array.from(new Set(userIds));
+      const data = [...new Set(userIds)];
 
       // Create an array of promises for fetch requests
       const fetchPromises = data.map(async (id) => {
@@ -30,7 +31,7 @@ export default function Posts(props) {
       });
 
       // Wait for all fetch requests to complete
-      await Promise.all(fetchPromises);
+      await Promise.all(fetchPromises)
       setUserPosts(posts.posts);
     } catch (err) {
       console.log("error fetching posts...", err);
@@ -73,16 +74,23 @@ export default function Posts(props) {
               time = createdAtDate.toString().substring(4, 24);
             }
 
-            // console.log(element.likes);
             let userId = getUserId();
             let isLiked = element.likes.includes(userId);
+
+            let userPostData;
+            // get userDetails of current post
+            userDetails.forEach((e) => {
+              if (e.firebaseUserId === element.userId) {
+                userPostData = e;
+              }
+            })
 
             return (
               <PostSection
                 key={_}
                 postId={element._id}
                 postTime={time}
-                data={userDetails[0]}
+                data={userPostData}
                 content={element.content}
                 isLikedByUser={isLiked}
                 commentCount={element.comments.length}

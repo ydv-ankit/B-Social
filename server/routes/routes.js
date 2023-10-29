@@ -35,6 +35,9 @@ router.get("/users/id/:firebaseUserId", async (req, res) => {
 // followings add/minus
 router.put("/users/followings", async (req, res) => {
   const followId = req.body.followId;
+  if (req.body.userId === req.body.followId) {
+    res.status(400).send({ "status": "cannot follow self" });
+  }
   try {
     const userDesc = await UserModel.findOne({
       firebaseUserId: req.body.userId,
