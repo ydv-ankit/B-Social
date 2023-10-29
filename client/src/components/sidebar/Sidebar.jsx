@@ -62,7 +62,7 @@ export default function Sidebar() {
               <div className="sidebarImg">
                 <HomeIcon />
               </div>
-              <div className="sidebarLinkText" onClick={() => navigate('/')}>Home</div>
+              <div className="sidebarLinkText" onClick={() => navigate('/home')}>Home</div>
             </div>
           </div>
           <div className="sidebarLinks">
