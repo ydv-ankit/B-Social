@@ -8,7 +8,7 @@ router.post("/users/new", async (req, res) => {
     const user = await UserModel.create(req.body);
     res.status(200).send(user);
   } catch (err) {
-    res.status(404).send({ "status": false });
+    res.status(302).send({ "status": false });
   }
 });
 
