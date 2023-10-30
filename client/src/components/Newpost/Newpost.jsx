@@ -3,25 +3,11 @@ import { getUserId } from "../../utils/cookies";
 
 import "./newpost.css";
 
-export default function Newpost(props) {
+export default function Newpost({ userData }) {
   const [isActive, setIsActive] = useState(false);
   const [postData, setPostData] = useState("");
   const [postError, setPostError] = useState("");
-  const [userData, setUserData] = useState();
 
-  async function getUserData() {
-    try {
-      await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
-        .then((tmp) => {
-          return tmp.json();
-        }).then((data)=>{
-          setUserData(data.data);
-        })
-        .catch((err) => createNotification("Cannot get user data !!"));
-    } catch (error) {
-      console.log("Cannot get user data !!");
-    }
-  }
 
   function createNotification(text) {
     var successDiv = document.createElement("div");
@@ -64,10 +50,6 @@ export default function Newpost(props) {
     setPostData(e.target.value);
   }
 
-  useEffect(() => {
-    getUserData(getUserId());
-  }, []);
-
   return (
     <div className="newPost">
       <div className="newPostWrapper">
@@ -87,7 +69,7 @@ export default function Newpost(props) {
           </div>
           <div className="newPostOptions">
             <div
-              className={isActive === true ? "newPostCreate" : "newPostCreate"}
+              className="newPostCreate"
             >
               <input
                 className={isActive === true ? "fieldActive" : "fieldNotActive"}

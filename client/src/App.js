@@ -6,6 +6,7 @@ import Rightbar from "./components/rightbar/Rightbar";
 import Explore from "./components/explore/Explore";
 
 import "./App.css";
+import Main from "./components/main/Main";
 
 export default function App() {
   return (
@@ -19,11 +20,7 @@ export default function App() {
               exact
               path="/home"
               element={
-                <>
-                  <Sidebar />
-                  <Home />
-                  <Rightbar />
-                </>
+                <Main />
               }
             />
             <Route

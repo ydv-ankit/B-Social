@@ -15,9 +15,8 @@ import { getUserId, removeCookies } from '../../utils/cookies';
 
 import "./sidebar.css";
 
-export default function Sidebar() {
+export default function Sidebar({userData}) {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState();
 
   function handleBottomLinkClickLogOut(e) {
     document.getElementById("sidebarPopUp").style.display = "none";
@@ -35,20 +34,6 @@ export default function Sidebar() {
       ? document.getElementById("sidebarPopUp").style.display = "block"
       : document.getElementById("sidebarPopUp").style.display = "none";
   }
-
-  async function getUserData() {
-    await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
-      .then((tmp) => {
-        return tmp.json();
-      }).then((data) => {
-        setUserData(data.data);
-      })
-      .catch((err) => console.log(err));
-  }
-
-  useEffect(() => {
-    getUserData();
-  }, [])
 
   return (
     <div className="sidebar">

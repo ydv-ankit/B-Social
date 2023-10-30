@@ -1,21 +1,9 @@
-import { useEffect } from "react";
 import Newpost from "../Newpost/Newpost";
 import Posts from "../Posts/Posts";
-import { getUserId } from "../../utils/cookies";
-import { useNavigate } from "react-router-dom";
-
 import "./home.css";
 
-export default function Home() {
-  const navigate = useNavigate();
-  let userData;
-
-  useEffect(() => {
-    const userId = getUserId();
-    if (userId === null) {
-      navigate("/");
-    }
-  }, [navigate]);
+export default function Home(props) {
+  console.log(props);
 
   return (
     <div className="home">
@@ -29,9 +17,9 @@ export default function Home() {
         </div>
       </div>
       <div className="homeNewPostContainer">
-        <Newpost userData={userData} />
+        <Newpost userData={props.userData} />
       </div>
-      <Posts />
+      <Posts userPosts={props.posts} userDetails={props.userDetails} />
     </div>
   );
 }
