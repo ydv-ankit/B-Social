@@ -3,7 +3,6 @@ import Posts from "../Posts/Posts";
 import "./home.css";
 
 export default function Home(props) {
-  console.log(props);
 
   return (
     <div className="home">
