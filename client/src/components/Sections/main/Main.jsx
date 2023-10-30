@@ -1,10 +1,10 @@
 import './main.css';
-import Home from '../Home/Home';
-import Sidebar from '../sidebar/Sidebar';
-import Rightbar from '../rightbar/Rightbar';
+import Home from '../../Home/Home';
+import Sidebar from '../../sidebar/Sidebar';
+import Rightbar from '../../rightbar/Rightbar';
 import { useEffect, useState } from 'react';
-import { getUserId, removeCookies } from '../../utils/cookies';
-import Loader from '../loader/Loader';
+import { getUserId } from '../../../utils/cookies';
+import Loader from '../../loader/Loader';
 
 let userDetails = [];
 const Main = () => {

@@ -10,12 +10,11 @@ import {
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from "react";
-import { getUserId, removeCookies } from '../../utils/cookies';
+import { removeCookies } from '../../utils/cookies';
 
 import "./sidebar.css";
 
-export default function Sidebar({userData}) {
+export default function Sidebar({ userData }) {
   const navigate = useNavigate();
 
   function handleBottomLinkClickLogOut(e) {

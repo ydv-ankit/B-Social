@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getUserId } from "../../utils/cookies";
 
 import "./newpost.css";

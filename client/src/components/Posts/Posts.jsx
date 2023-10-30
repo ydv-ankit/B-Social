@@ -1,7 +1,5 @@
 import PostSection from '../PostSection/PostSection';
-import { useEffect, useState } from 'react';
 import { getUserId } from "../../utils/cookies"
-import Loader from '../loader/Loader'
 import './posts.css'
 
 export default function Posts({ userPosts, userDetails }) {
