@@ -62,9 +62,6 @@ export default function PostSection(props) {
                         </div>
                         <div className="postsTopRight">
                             <span className="postsTime">{props.postTime.toString()}</span>
-                            <span className="postsMoreOptions">
-                                <MoreHorizOutlined />
-                            </span>
                         </div>
                     </div>
                     <div className="postsInnerContent">

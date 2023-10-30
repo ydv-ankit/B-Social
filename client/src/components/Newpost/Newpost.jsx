@@ -23,6 +23,7 @@ export default function Newpost({ userData }) {
 
   const createPost = async () => {
     if (!isActive) return;
+    setIsActive(false)
     const postObj = {
       userId: getUserId(),
       content: postData,
@@ -37,7 +38,6 @@ export default function Newpost({ userData }) {
     })
       .then(async (tmp) => {
         setPostData("");
-        setIsActive(false);
         createNotification("Posted successfully !");
       })
       .catch((err) => setPostError("Posting error !!"));
