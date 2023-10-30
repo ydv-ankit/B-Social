@@ -1,11 +1,9 @@
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthPage from "./components/auth/AuthPage";
-import Sidebar from "./components/sidebar/Sidebar";
-import Rightbar from "./components/rightbar/Rightbar";
-import Explore from "./components/explore/Explore";
-
-import "./App.css";
-import Main from "./components/Sections/main/Main";
+import Main from "./Sections/main/Main";
+import ExploreSection from "./Sections/exploreSection/ExploreSection";
+import ProfileSection from "./Sections/profileSection/ProfileSection";
 
 export default function App() {
   return (
@@ -13,8 +11,10 @@ export default function App() {
       <div className="container">
         <BrowserRouter>
           <Routes>
+            {/* authentication route */}
             <Route path="/" element={<AuthPage />} />
             <Route path="/login" element={<AuthPage />} />
+            {/* home route */}
             <Route
               exact
               path="/home"
@@ -22,16 +22,18 @@ export default function App() {
                 <Main />
               }
             />
+            {/* explore route */}
             <Route
               exact
               path="/explore"
               element={
-                <>
-                  <Sidebar />
-                  <Explore />
-                  <Rightbar />
-                </>
+                <ExploreSection />
               }
+            />
+            {/* profile page route */}
+            <Route
+              exact path="/profile/:id"
+              element={<ProfileSection />}
             />
           </Routes>
         </BrowserRouter>

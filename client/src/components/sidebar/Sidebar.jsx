@@ -10,7 +10,7 @@ import {
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import { useNavigate } from 'react-router-dom';
-import { removeCookies } from '../../utils/cookies';
+import { getUserId, removeCookies } from '../../utils/cookies';
 
 import "./sidebar.css";
 
@@ -102,7 +102,7 @@ export default function Sidebar({ userData }) {
               <div className="sidebarImg">
                 <PersonOutlineOutlined />
               </div>
-              <div className="sidebarLinkText" onClick={() => navigate('/profile')}>Profile</div>
+              <div className="sidebarLinkText" onClick={() => navigate('/profile/' + getUserId())}>Profile</div>
             </div>
           </div>
           <div className="sidebarLinks">

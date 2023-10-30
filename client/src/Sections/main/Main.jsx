@@ -1,10 +1,10 @@
 import './main.css';
-import Home from '../../Home/Home';
-import Sidebar from '../../sidebar/Sidebar';
-import Rightbar from '../../rightbar/Rightbar';
+import Home from '../../components/Home/Home';
+import Sidebar from '../../components/sidebar/Sidebar';
+import Rightbar from '../../components/rightbar/Rightbar';
 import { useEffect, useState } from 'react';
-import { getUserId } from '../../../utils/cookies';
-import Loader from '../../loader/Loader';
+import { getUserId } from '../../utils/cookies';
+import Loader from '../../components/loader/Loader';
 
 let userDetails = [];
 const Main = () => {
@@ -20,6 +20,7 @@ const Main = () => {
             })
             .catch((err) => console.log(err));
     }
+    
     const handleGetPosts = async () => {
         const userId = getUserId();
 
