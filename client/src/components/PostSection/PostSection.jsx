@@ -5,12 +5,18 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ScreenRotationAltIcon from '@mui/icons-material/ScreenRotationAlt';
 import { useState } from 'react';
 import { getUserId } from "../../utils/cookies";
+import { useNavigate } from 'react-router-dom';
 
 export default function PostSection(props) {
+    const navigate = useNavigate();
     const [isLiked, setIsLiked] = useState(props.isLikedByUser);
     const [likeCount, setLikeCount] = useState(props.likeCount);
     const postId = props.postId;
     const userId = getUserId();
+
+    function handlePostProfileClick() {
+        navigate('/profile/' + props.data.firebaseUserId);
+    }
 
     const handleLike = async () => {
         if (isLiked) {
@@ -46,12 +52,12 @@ export default function PostSection(props) {
     return (
         <div className="posts">
             <div className="postsWrapper">
-                <div className="profileImg">
+                <div className="profileImg" onClick={handlePostProfileClick}>
                     <img src={props.data.profilePicture} alt="" />
                 </div>
                 <div className="postsContent">
                     <div className="postsUserDetails">
-                        <div>
+                        <div className='postUserDetailsHover' onClick={handlePostProfileClick}>
                             <span className="postsUserFullname">
                                 {props.data.fullname}
                             </span>

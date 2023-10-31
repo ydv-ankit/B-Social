@@ -25,7 +25,7 @@ export default function Sidebar({ userData }) {
 
   function handleBottomLinkClickProfile(e) {
     document.getElementById("sidebarPopUp").style.display = "none";
-    navigate("/profile");
+    navigate("/profile/" + getUserId());
   }
 
   function handleProfileClick(e) {
@@ -39,7 +39,7 @@ export default function Sidebar({ userData }) {
       <div className="sidebarWrapper">
         <div className="sidebarContents">
           <div className="sidebarLogo">
-            <img src="assets/icons/twitter-x.svg" alt="Twitter" />
+            <img src="/assets/icons/twitter-x.svg" alt="Twitter" />
           </div>
           <div className="sidebarLinks">
             <div className="sidebarLinkContent">

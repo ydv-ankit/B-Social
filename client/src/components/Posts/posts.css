@@ -12,6 +12,10 @@
   border-radius: 50%;
 }
 
+.profileImg:hover{
+  cursor: pointer;
+}
+
 .postsContent {
   display: flex;
   flex-direction: column;
@@ -107,4 +111,8 @@
 
 .loading{
   margin-top: 100px;
+}
+
+.postUserDetailsHover:hover{
+  cursor: pointer;
 }

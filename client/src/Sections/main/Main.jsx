@@ -10,10 +10,11 @@ let userDetails = [];
 const Main = () => {
     const [userPosts, setUserPosts] = useState([]);
     const [userData, setUserData] = useState();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const userId = getUserId();
 
     async function getUserData() {
-        await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
+        await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + userId)
             .then((tmp) => {
                 return tmp.json();
             }).then((data) => {
@@ -24,7 +25,6 @@ const Main = () => {
 
     const handleGetPosts = async () => {
         setIsLoading(true)
-        const userId = getUserId();
 
         try {
             const resp = await fetch(process.env.REACT_APP_SERVER_URI + "posts/all/" + userId);

@@ -19,7 +19,7 @@ const ExploreSection = () => {
 
     useEffect(() => {
         getUserData();
-    })
+    }, [])
 
     return (
         <>

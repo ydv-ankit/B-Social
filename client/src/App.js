@@ -32,7 +32,7 @@ export default function App() {
             />
             {/* profile page route */}
             <Route
-              exact path="/profile/:id"
+              path="/profile/:userId"
               element={<ProfileSection />}
             />
           </Routes>

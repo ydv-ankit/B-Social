@@ -1,0 +1,72 @@
+.profileWrapper {
+    overflow-x: hidden;
+}
+
+.profileTop {
+    width: 100%;
+    border-bottom: 1px solid rgba(27, 60, 73, 0.775);
+    position: -webkit-sticky;
+    top: 0;
+}
+
+.profileTopbar {
+    margin: 10px;
+}
+
+.profileTopbarFullname {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.profileTopbarPostsCount {
+    font-size: 14px;
+    opacity: 0.63;
+}
+
+.profileCenter {
+    width: 100%;
+}
+
+.profileCenterContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileCenterUserPicCircleImg img {
+    border-radius: 50%;
+    width: 150px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.profileCenterContentFullname {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.profileCenterContentUsername {
+    text-align: center;
+    opacity: 0.7;
+}
+
+.follow {
+    margin: 10px;
+    opacity: 0.7;
+}
+
+.profileCenterContentInfo {
+    margin: 10px;
+}
+
+.followingBtn{
+    background-color: rgb(24, 22, 22);
+    color: white;
+}
+
+.followingBtn:hover{
+    background-color: grey;
+    color: black;
+}

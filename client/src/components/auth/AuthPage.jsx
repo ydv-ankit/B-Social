@@ -35,7 +35,7 @@ export default function AuthPage() {
     <div className="auth">
       <div className="authWrapper">
         <div className="authLeft">
-          <img src="assets/icons/twitter-x.png" alt="" />
+          <img src="/assets/icons/twitter-x.png" alt="" />
         </div>
         <div className="authRight">
           <h1>Happening Now</h1>
