@@ -40,10 +40,10 @@ export default function Explore() {
                 : !searched
                   ? <div className="idle"><div className='idleText'>Explore this world ..!</div><div className='idleText'>Here, search for any user</div></div>
                   : usersData.length !== 0
-                    ? usersData.map((element) => (
-                      <UserList data={element} />
+                    ? usersData.map((element, _) => (
+                      <UserList key={_} data={element} />
                     ))
-                    : <div className="nodata">Not found ! Try something else </div>
+                    : <div className="nodata">Not found ! Try something else ... </div>
             }
           </div>
         </div>

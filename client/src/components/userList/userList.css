@@ -1,5 +1,11 @@
 .userList{
     margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.userList:hover{
+    background-color: rgb(51, 49, 49);
 }
 
 .profileImg img {

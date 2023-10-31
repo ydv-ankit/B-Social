@@ -10,11 +10,11 @@ const UserList = ({ data }) => {
 
     return (
         <div className="userList">
-            <div className="userListWrapper">
-                <div className="profileImg" onClick={handleProfileClick}>
+            <div className="userListWrapper" onClick={handleProfileClick}>
+                <div className="profileImg">
                     <div className="userListUserDetails">
                         <img src={data.profilePicture} alt="" />
-                        <div className='userListUserDetailsHover' onClick={handleProfileClick}>
+                        <div className='userListUserDetailsHover'>
                             <span className="userListUserFullname">
                                 {data.fullname}
                             </span>
