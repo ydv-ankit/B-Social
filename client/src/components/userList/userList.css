@@ -1,0 +1,25 @@
+.userList{
+    margin: 20px;
+}
+
+.profileImg img {
+    border-radius: 50%;
+}
+
+.userListUserDetails {
+    display: flex;
+    align-items: center;
+}
+
+
+.userListUserFullname {
+    margin-left: 20px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.userListUserUsername {
+    margin-left: 20px;
+    font-size: 15px;
+    opacity: 0.6;
+}
