@@ -10,6 +10,7 @@ let userDetails = [];
 const Main = () => {
     const [userPosts, setUserPosts] = useState([]);
     const [userData, setUserData] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
     async function getUserData() {
         await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
@@ -20,8 +21,9 @@ const Main = () => {
             })
             .catch((err) => console.log(err));
     }
-    
+
     const handleGetPosts = async () => {
+        setIsLoading(true)
         const userId = getUserId();
 
         try {
@@ -46,8 +48,10 @@ const Main = () => {
             // Wait for all fetch requests to complete
             await Promise.all(fetchPromises);
             setUserPosts(posts.posts);
+            setIsLoading(false);
         } catch (err) {
             console.log("error fetching posts...", err);
+            setIsLoading(false);
         }
     }
 
@@ -56,7 +60,7 @@ const Main = () => {
         handleGetPosts();
     }, [])
 
-    if (!userData || !userPosts || !userDetails) {
+    if (isLoading) {
         return (
             <Loader />
         )
