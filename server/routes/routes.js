@@ -32,6 +32,21 @@ router.get("/users/id/:firebaseUserId", async (req, res) => {
   }
 });
 
+router.get("/users/explore/:text", async (req, res) => {
+  const searchText = req.params.text.toLowerCase();
+  let data = [];
+  await UserModel.find().then((resp) => {
+    resp.map(e => {
+      if (e.fullname.toLowerCase().includes(searchText) || e.username.toLowerCase().includes(searchText)) {
+        data.push(e);
+      }
+    })
+    res.status(200).send({ "users": data });
+  }).catch((err) => {
+    res.status(202).send({ "status": "try again later !" })
+  })
+})
+
 // followings add/minus
 router.put("/users/followings", async (req, res) => {
   const followId = req.body.followId;
