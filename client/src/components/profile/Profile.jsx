@@ -2,10 +2,12 @@ import './profile.css'
 import Posts from '../Posts/Posts'
 import { useEffect, useState } from 'react';
 import { getUserId } from '../../utils/cookies';
+import FollowingsPage from '../followingsPage/FollowingsPage';
 
 let userDetails = [];
 const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
   const [isFollowing, setIsFollowing] = useState(false);
+  const [tab, setTab] = useState('posts');
 
   async function handleFollow() {
     if (isFollowing) {
@@ -32,6 +34,7 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
   useEffect(() => {
     if (userData.followers.includes(getUserId())) {
       setIsFollowing(true);
+      setTab('posts');
     }
   }, [isFollowing])
 
@@ -71,18 +74,23 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
             </div>
             <div className="profileCenterContentInfo">
               <div className="profileCenterContentInfoFollowers">
-                <span className='follow'>Followers</span><span>{userData.followers.length}</span>
+                <span className='follow' onClick={() => setTab('followers')}>Followers</span><span>{userData.followers.length}</span>
               </div>
               <div className="profileCenterContentInfoFollowings">
-                <span className='follow'>Followings</span><span>{userData.followings.length}</span>
+                <span className='follow' onClick={() => setTab('followings')}>Followings</span><span>{userData.followings.length}</span>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="profileUserPosts">
-          <Posts userPosts={userPosts} userDetails={userDetails} />
-        </div>
+        {
+          tab === 'posts'
+            ? <div className="profileUserPosts">
+              <Posts userPosts={userPosts} userDetails={userDetails} />
+            </div>
+            : tab === 'followings'
+              ? <FollowingsPage />
+              : tab
+        }
       </div>
     </div>
   )
