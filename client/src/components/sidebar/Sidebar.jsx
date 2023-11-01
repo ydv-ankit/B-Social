@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUserId, removeCookies } from '../../utils/cookies';
 
 import "./sidebar.css";
+import { useEffect } from "react";
 
 export default function Sidebar({ userData }) {
   const navigate = useNavigate();
@@ -33,6 +34,12 @@ export default function Sidebar({ userData }) {
       ? document.getElementById("sidebarPopUp").style.display = "block"
       : document.getElementById("sidebarPopUp").style.display = "none";
   }
+
+  useEffect(() => {
+    if (getUserId() === null || getUserId() === "null") {
+      navigate("/");
+    }
+  }, [])
 
   return (
     <div className="sidebar">
