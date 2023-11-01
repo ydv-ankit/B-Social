@@ -208,4 +208,36 @@ router.get("/post/retweet/:userId/:postId", async (req, res) => {
     })
 })
 
+// get followings
+router.get("/users/get/followings/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const user = await UserModel.findOne({ firebaseUserId: userId });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const followings = user.followings || [];
+
+    const followingsData = await Promise.all(
+      followings.map(async (element) => {
+        try {
+          const userResp = await UserModel.findOne({ firebaseUserId: element });
+          return userResp;
+        } catch (err) {
+          console.log(err);
+          return null;
+        }
+      })
+    );
+
+    res.status(201).json({ followingsData: followingsData.filter(Boolean) });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;
