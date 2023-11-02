@@ -25,6 +25,11 @@ const PostPreview = ({ userPost }) => {
                         likeCount={element.likes.length}
                     /> */}
                 </div>
+                <div className="postPreviewBottom">
+                    <div className="postPreviewComments">
+                        {/* comments */}
+                    </div>
+                </div>
             </div>
         </div>
     )
