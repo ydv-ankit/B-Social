@@ -38,7 +38,7 @@ export default function Posts({ userPosts, userDetails }) {
           );
         })
       ) : (
-        <div className='noPosts'>No posts found !!</div>
+        <div className='noPosts'>No posts found !! Follow someone ...</div>
       )}
     </>
   );
