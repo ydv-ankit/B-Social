@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
 import './followingsPage.css';
-import { getUserId } from '../../utils/cookies';
+import { useEffect, useState } from 'react';
 import UserList from '../userList/UserList';
 
-const FollowingsPage = () => {
+const FollowingsPage = ({ userProfileId }) => {
 
-    const [userFollowingData, setUserFollowingData] = useState();
+    const [userFollowingData, setUserFollowingData] = useState([]);
+    console.log(userFollowingData);
 
     const getFollowings = async () => {
-        await fetch(process.env.REACT_APP_SERVER_URI + "users/get/followings/" + getUserId())
+        await fetch(process.env.REACT_APP_SERVER_URI + "users/get/followings/" + userProfileId)
             .then((res) => {
                 return res.json()
             })
@@ -28,7 +28,7 @@ const FollowingsPage = () => {
         <div className="followings">
             <div className="followingsWrapper">
                 {
-                    !userFollowingData
+                    userFollowingData && userFollowingData.length === 0
                         ? <div className="nodata">No Followings</div>
                         : userFollowingData && userFollowingData.map((element, _) => (
                             <UserList key={_} data={element} />
