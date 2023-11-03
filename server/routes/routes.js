@@ -8,7 +8,7 @@ router.post("/users/new", async (req, res) => {
     const user = await UserModel.create(req.body);
     res.status(200).send(user);
   } catch (err) {
-    res.status(302).send({ "status": false });
+    res.status(203).send({ "status": false });
   }
 });
 
@@ -16,9 +16,13 @@ router.get("/users/:email", async (req, res) => {
   const email = req.params.email;
   try {
     const user = await UserModel.findOne({ email: email });
-    res.status(200).send({ status: user });
+    if (user) {
+      res.status(200).send({ status: user });
+    } else {
+      res.status(200).send({ status: "not found" });
+    }
   } catch (err) {
-    res.status(400).send({ error: "not found" });
+    res.status(400).send({ error: "cannot get userdata" });
   }
 });
 
