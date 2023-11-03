@@ -93,7 +93,9 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
                 userProfileId={userData.firebaseUserId}
               />
               : tab === 'followers'
-                ? <FollowersPage />
+                ? <FollowersPage
+                  userProfileId={userData.firebaseUserId}
+                />
                 : null
         }
       </div>
