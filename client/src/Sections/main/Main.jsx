@@ -32,11 +32,14 @@ const Main = () => {
 
             let userIds = [];
             posts.posts.forEach((element) => {
-                userIds.push(element.userId);
+                if (element.userId !== userId) {
+                    userIds.push(element.userId);
+                }
             });
 
             // Remove duplicates
             const data = [...new Set(userIds)];
+            // data.pop(userId);
 
             // Create an array of promises for fetch requests
             const fetchPromises = data.map(async (id) => {
