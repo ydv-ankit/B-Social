@@ -3,6 +3,7 @@ import Posts from '../Posts/Posts'
 import { useEffect, useState } from 'react';
 import { getUserId } from '../../utils/cookies';
 import FollowingsPage from '../followingsPage/FollowingsPage';
+import FollowersPage from '../followersPage/FollowersPage';
 
 let userDetails = [];
 const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
@@ -88,8 +89,12 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
               <Posts userPosts={userPosts} userDetails={userDetails} />
             </div>
             : tab === 'followings'
-              ? <FollowingsPage />
-              : tab
+              ? <FollowingsPage
+                userProfileId={userData.firebaseUserId}
+              />
+              : tab === 'followers'
+                ? <FollowersPage />
+                : null
         }
       </div>
     </div>
