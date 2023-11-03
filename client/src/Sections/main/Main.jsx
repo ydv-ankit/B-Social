@@ -24,8 +24,6 @@ const Main = () => {
     }
 
     const handleGetPosts = async () => {
-        setIsLoading(true)
-
         try {
             const resp = await fetch(process.env.REACT_APP_SERVER_URI + "posts/all/" + userId);
             const posts = await resp.json();
@@ -39,7 +37,6 @@ const Main = () => {
 
             // Remove duplicates
             const data = [...new Set(userIds)];
-            // data.pop(userId);
 
             // Create an array of promises for fetch requests
             const fetchPromises = data.map(async (id) => {
