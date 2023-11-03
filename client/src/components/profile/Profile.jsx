@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import { getUserId } from '../../utils/cookies';
 import FollowingsPage from '../followingsPage/FollowingsPage';
 import FollowersPage from '../followersPage/FollowersPage';
+import Loader from '../loader/Loader';
 
 let userDetails = [];
 const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [tab, setTab] = useState('posts');
+  const [isLoading, setIsLoading] = useState(true);
 
   async function handleFollow() {
     if (isFollowing) {
@@ -26,9 +28,10 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
     }).then((resp) => {
       return resp.json()
     }).then((data) => {
+      setIsLoading(false);
       return;
     }).catch((err) => {
-      console.log(err);
+      setIsLoading(false);
     })
   }
 
@@ -38,6 +41,12 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
       setTab('posts');
     }
   }, [isFollowing])
+
+  if (isLoading) {
+    return (
+      <Loader />
+    )
+  }
 
   return (
     <div className='profile'>
