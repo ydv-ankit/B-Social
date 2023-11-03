@@ -29,7 +29,7 @@ export default function Explore() {
       <div className="exploreWrapper">
         <div className="exploreSearch">
           <input className='exploreSearchBox' type="text" placeholder='Search User' onChange={(e) => setSearchText(e.target.value)} />
-          <div id='searchBtn' className="exploreSearchIcon" onClick={()=>handleUserSearch}><SearchIcon /></div>
+          <div id='searchBtn' className="exploreSearchIcon" onClick={handleUserSearch}><SearchIcon /></div>
         </div>
 
         <div className="exploreList">
