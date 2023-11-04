@@ -1,7 +1,7 @@
 import "./postPreview.css"
 import PostSection from "../PostSection/PostSection"
 
-const PostPreview = ({ userPost }) => {
+const PostPreview = ({ userPost, postUserData }) => {
     return (
         <div className="postPreview">
             <div className="postPreviewWrapper">
@@ -14,7 +14,7 @@ const PostPreview = ({ userPost }) => {
                     </div>
                 </div>
                 <div className="postPreviewContent">
-                    {/* <PostSection
+                    <PostSection
                         key={index}
                         postId={element._id}
                         postTime={time}
@@ -23,11 +23,13 @@ const PostPreview = ({ userPost }) => {
                         isLikedByUser={isLiked}
                         commentCount={element.comments.length}
                         likeCount={element.likes.length}
-                    /> */}
+                    />
                 </div>
                 <div className="postPreviewBottom">
                     <div className="postPreviewComments">
-                        {/* comments */}
+                        {userPost.comments.map((e) => {
+                            <Comments text={e} />
+                        })}
                     </div>
                 </div>
             </div>
