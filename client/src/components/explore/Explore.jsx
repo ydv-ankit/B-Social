@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useState } from 'react';
 import Loader from '../loader/Loader'
 import UserList from '../userList/UserList';
+import { getUserId } from '../../utils/cookies'
 
 export default function Explore() {
   const [searchText, setSearchText] = useState(null);
@@ -41,7 +42,7 @@ export default function Explore() {
                   ? <div className="idle"><div className='idleText'>Explore this world ..!</div><div className='idleText'>Here, search for any user</div></div>
                   : usersData.length !== 0
                     ? usersData.map((element, _) => (
-                      <UserList key={_} data={element} />
+                      element.firebaseUserId !== getUserId() ? <UserList key={_} data={element} /> : null
                     ))
                     : <div className="nodata">Not found ! Try something else ... </div>
             }
