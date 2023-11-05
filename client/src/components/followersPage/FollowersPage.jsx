@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 
 const FollowersPage = () => {
     const { userProfileId } = useParams();
-    console.log(userProfileId);
     const [userFollowersData, setUserFollowersData] = useState([]);
 
     const getFollowers = async () => {
@@ -28,6 +27,9 @@ const FollowersPage = () => {
     return (
         <div className="followers">
             <div className="followersWrapper">
+                <div className="followersPageTop">
+                    Followers
+                </div>
                 {
                     userFollowersData && userFollowersData.length === 0
                         ? <div className="nodata">No Followers</div>

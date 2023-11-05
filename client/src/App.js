@@ -4,8 +4,8 @@ import AuthPage from "./components/auth/AuthPage";
 import Main from "./Sections/main/Main";
 import ExploreSection from "./Sections/exploreSection/ExploreSection";
 import ProfileSection from "./Sections/profileSection/ProfileSection";
-import FollowersPage from "./components/followersPage/FollowersPage";
-import FollowingsPage from "./components/followingsPage/FollowingsPage";
+import FollowersSection from "./Sections/FollowersSection/FollowersSection";
+import FollowingsSection from "./Sections/FollowingsSection/FollowingsSection";
 
 export default function App() {
   return (
@@ -39,11 +39,11 @@ export default function App() {
             />
             <Route
               path="/followers/:userProfileId"
-              element={<FollowersPage />}
+              element={<FollowersSection />}
             />
             <Route
               path="/followings/:userProfileId"
-              element={<FollowingsPage />}
+              element={<FollowingsSection />}
             />
           </Routes>
         </BrowserRouter>
