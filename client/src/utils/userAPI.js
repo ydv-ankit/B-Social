@@ -42,17 +42,4 @@ async function createUserDb(data) {
   }
 }
 
-async function getUserData(userId) {
-  try {
-    await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + userId)
-      .then(async (tmp) => {
-        const data = await tmp.json();
-        return data.data
-      })
-      .catch((err) => { return null; })
-  } catch (error) {
-    console.log("Cannot get user data !!");
-  }
-}
-
-export { createUserDb, getUserData };
+export { createUserDb };
