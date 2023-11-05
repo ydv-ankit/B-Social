@@ -14,7 +14,7 @@ const PostPreview = ({ userPost, postUserData }) => {
                     </div>
                 </div>
                 <div className="postPreviewContent">
-                    <PostSection
+                    {/* <PostSection
                         key={index}
                         postId={element._id}
                         postTime={time}
@@ -23,13 +23,13 @@ const PostPreview = ({ userPost, postUserData }) => {
                         isLikedByUser={isLiked}
                         commentCount={element.comments.length}
                         likeCount={element.likes.length}
-                    />
+                    /> */}
                 </div>
                 <div className="postPreviewBottom">
                     <div className="postPreviewComments">
-                        {userPost.comments.map((e) => {
+                        {/* {userPost.comments.map((e) => {
                             <Comments text={e} />
-                        })}
+                        })} */}
                     </div>
                 </div>
             </div>

@@ -1,11 +1,11 @@
 import './followingsPage.css';
 import { useEffect, useState } from 'react';
 import UserList from '../userList/UserList';
+import { useParams } from 'react-router-dom';
 
-const FollowingsPage = ({ userProfileId }) => {
-
+const FollowingsPage = () => {
+    const { userProfileId } = useParams();
     const [userFollowingData, setUserFollowingData] = useState([]);
-    console.log(userFollowingData);
 
     const getFollowings = async () => {
         await fetch(process.env.REACT_APP_SERVER_URI + "users/get/followings/" + userProfileId)

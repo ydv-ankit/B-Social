@@ -6,17 +6,16 @@ import Rightbar from '../../components/rightbar/Rightbar'
 import Loader from '../../components/loader/Loader'
 import { useParams } from 'react-router-dom';
 
-let userDetails = [];
 const ProfileSection = () => {
   const { userId } = useParams();
-  const [userPosts, setUserPosts] = useState(null);
+  const [userPosts, setUserPosts] = useState([]);
   const [userData, setUserData] = useState(null);
+  const [userDetails, setUserDetails] = useState([]);
   const [profileData, setProfileData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const isSameUser = userId === getUserId() ? true : false;
 
   async function getUserData() {
-    setIsLoading(true);
     await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
       .then((tmp) => {
         return tmp.json();
@@ -36,6 +35,20 @@ const ProfileSection = () => {
       .catch((err) => console.log(err));
   }
 
+  async function getUserDetails(userIdData) {
+    userIdData.forEach(async (id) => {
+      await fetch(process.env.REACT_APP_SERVER_URI + 'users/id/' + id)
+        .then((resp) => {
+          return resp.json()
+        })
+        .then((data) => {
+          setUserDetails((prevData) => [...prevData, data.data])
+        }).catch((err) => {
+          console.log(err);
+        })
+    })
+  }
+
   const handleGetPosts = async () => {
     try {
       const resp = await fetch(process.env.REACT_APP_SERVER_URI + "posts/profileposts/" + userId);
@@ -47,18 +60,15 @@ const ProfileSection = () => {
       });
 
       // Remove duplicates
-      const data = [...new Set(userIds)];
-
-      // Create an array of promises for fetch requests
-      const fetchPromises = data.map(async (id) => {
-        const resp = await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + id);
-        const get_resp_data = await resp.json();
-        userDetails.push(get_resp_data.data);
-      });
-
-      // Wait for all fetch requests to complete
-      await Promise.all(fetchPromises);
+      let data = [];
+      userIds.map((id) => {
+        if (!data.includes(id)) {
+          data.push(id);
+        }
+        return true;
+      })
       setUserPosts(posts.posts);
+      getUserDetails(data)
       setIsLoading(false);
     } catch (err) {
       console.log("error fetching posts...", err);
@@ -70,7 +80,7 @@ const ProfileSection = () => {
     getUserData();
     getProfileUserData();
     handleGetPosts();
-  }, [])
+  }, [userId])
 
   if (isLoading) {
     return (
@@ -81,7 +91,7 @@ const ProfileSection = () => {
   return (
     <>
       <Sidebar userData={userData} />
-      <Profile userData={profileData} userPosts={userPosts} userDetails={userDetails} isSameUser={isSameUser} />
+      <Profile userData={profileData} userPosts={userPosts} userDetails={userDetails} isSameUser={isSameUser} userId={userId} />
       <Rightbar />
     </>
   )

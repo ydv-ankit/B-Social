@@ -1,11 +1,12 @@
 import './followersPage.css';
 import { useEffect, useState } from 'react';
 import UserList from '../userList/UserList';
+import { useParams } from 'react-router-dom';
 
-const FollowersPage = ({ userProfileId }) => {
-
+const FollowersPage = () => {
+    const { userProfileId } = useParams();
+    console.log(userProfileId);
     const [userFollowersData, setUserFollowersData] = useState([]);
-    console.log(userFollowersData);
 
     const getFollowers = async () => {
         await fetch(process.env.REACT_APP_SERVER_URI + "users/get/followers/" + userProfileId)

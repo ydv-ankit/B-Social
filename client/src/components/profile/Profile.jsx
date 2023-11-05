@@ -5,12 +5,24 @@ import { getUserId } from '../../utils/cookies';
 import FollowingsPage from '../followingsPage/FollowingsPage';
 import FollowersPage from '../followersPage/FollowersPage';
 import Loader from '../loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
-let userDetails = [];
-const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
+const Profile = ({ userData, userPosts, userDetails, isSameUser, userId }) => {
+
   const [isFollowing, setIsFollowing] = useState(false);
-  const [tab, setTab] = useState('posts');
-  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData && userData.followers.includes(getUserId())) {
+      setIsFollowing(true);
+    }
+  }, [isFollowing, userData, userDetails, isSameUser, userId])
+
+  if (!userData || !userDetails) {
+    return (
+      <Loader />
+    )
+  }
 
   async function handleFollow() {
     if (isFollowing) {
@@ -28,25 +40,12 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
     }).then((resp) => {
       return resp.json()
     }).then((data) => {
-      setIsLoading(false);
       return;
     }).catch((err) => {
-      setIsLoading(false);
     })
   }
 
-  useEffect(() => {
-    if (userData.followers.includes(getUserId())) {
-      setIsFollowing(true);
-      setTab('posts');
-    }
-  }, [isFollowing])
 
-  if (isLoading) {
-    return (
-      <Loader />
-    )
-  }
 
   return (
     <div className='profile'>
@@ -65,7 +64,7 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
             <div className="profileCenterContent">
               <div className="profileCenterUserPicCircle">
                 <div className="profileCenterUserPicCircleImg">
-                  <img src={userData.profilePicture} alt="user picture" />
+                  <img src={userData && userData.profilePicture} alt="user picture" />
                 </div>
               </div>
               <div className="profileCenterContentFullname">
@@ -84,29 +83,17 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser }) => {
             </div>
             <div className="profileCenterContentInfo">
               <div className="profileCenterContentInfoFollowers">
-                <span className='follow' onClick={() => setTab('followers')}>Followers</span><span>{userData.followers.length}</span>
+                <span className='follow' onClick={() => navigate('/followers/' + userId)}>Followers</span><span>{userData.followers.length}</span>
               </div>
               <div className="profileCenterContentInfoFollowings">
-                <span className='follow' onClick={() => setTab('followings')}>Followings</span><span>{userData.followings.length}</span>
+                <span className='follow' onClick={() => navigate('/followings/' + userId)}>Followings</span><span>{userData.followings.length}</span>
               </div>
             </div>
           </div>
         </div>
-        {
-          tab === 'posts'
-            ? <div className="profileUserPosts">
-              <Posts userPosts={userPosts} userDetails={userDetails} />
-            </div>
-            : tab === 'followings'
-              ? <FollowingsPage
-                userProfileId={userData.firebaseUserId}
-              />
-              : tab === 'followers'
-                ? <FollowersPage
-                  userProfileId={userData.firebaseUserId}
-                />
-                : null
-        }
+        <div className="profileUserPosts">
+          <Posts userPosts={userPosts} userDetails={userDetails} />
+        </div>
       </div>
     </div>
   )

@@ -2,9 +2,17 @@ import PostSection from '../PostSection/PostSection';
 import { getUserId } from "../../utils/cookies";
 import { getPostTime } from '../../utils/getPostTime';
 import './posts.css';
+import { useEffect } from 'react';
+import Loader from '../loader/Loader';
 
 export default function Posts({ userPosts, userDetails }) {
   const sortedPosts = userPosts && userPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  if (!userDetails || (userPosts.length !== 0 && userDetails && userDetails.length === 0)) {
+    return (
+      <Loader />
+    )
+  }
 
   return (
     <>
