@@ -1,8 +1,23 @@
 import './comments.css'
 
-const Comments = () => {
+const Comments = (props) => {
   return (
-    <div>Comments</div>
+    <div className="comments">
+      <div className="commentsWrapper">
+        <div className="profileImg">
+          <img src="" alt="" />
+        </div>
+        <div className="commentsRight">
+          <div className="commentsUserFullname">
+            <span>Ankit Ydv</span>
+          </div>
+          <div className="commentsUserUsername">
+            @ankitydv1124
+          </div>
+
+        </div>
+      </div>
+    </div>
   )
 }
 

@@ -6,6 +6,7 @@ import ExploreSection from "./Sections/exploreSection/ExploreSection";
 import ProfileSection from "./Sections/profileSection/ProfileSection";
 import FollowersSection from "./Sections/FollowersSection/FollowersSection";
 import FollowingsSection from "./Sections/FollowingsSection/FollowingsSection";
+import PostPreviewSection from "./Sections/postPreviewSection/PostPreviewSection";
 
 export default function App() {
   return (
@@ -44,6 +45,10 @@ export default function App() {
             <Route
               path="/followings/:userProfileId"
               element={<FollowingsSection />}
+            />
+            <Route
+              path="/post/:userId/:postId"
+              element={<PostPreviewSection />}
             />
           </Routes>
         </BrowserRouter>

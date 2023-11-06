@@ -19,6 +19,14 @@ export default function PostSection(props) {
         navigate('/profile/' + props.data.firebaseUserId);
     }
 
+    function handleCommentSection() {
+        if (!props.isPostPreview) {
+            navigate('/post/' + props.data.firebaseUserId + "/" + props.postId);
+        } else {
+            return;
+        }
+    }
+
     async function handlePostRetweet() {
         setRetweetCount(retweetCount + 1);
         await fetch(process.env.REACT_APP_SERVER_URI + 'post/retweet/' + getUserId() + '/' + props.postId)
@@ -100,7 +108,7 @@ export default function PostSection(props) {
                         <p>{props.content}</p>
                     </div>
                     <div className="postsBottomActions">
-                        <span className="postsBottomSection">
+                        <span className="postsBottomSection" onClick={handleCommentSection} >
                             <span className="postsBottomSectionIcon">
                                 <ChatBubbleOutlineIcon />
                             </span>
