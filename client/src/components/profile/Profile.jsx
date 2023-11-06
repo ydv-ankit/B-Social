@@ -2,8 +2,6 @@ import './profile.css'
 import Posts from '../Posts/Posts'
 import { useEffect, useState } from 'react';
 import { getUserId } from '../../utils/cookies';
-import FollowingsPage from '../followingsPage/FollowingsPage';
-import FollowersPage from '../followersPage/FollowersPage';
 import Loader from '../loader/Loader';
 import { useNavigate } from 'react-router-dom';
 
