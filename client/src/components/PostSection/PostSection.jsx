@@ -11,11 +11,24 @@ export default function PostSection(props) {
     const navigate = useNavigate();
     const [isLiked, setIsLiked] = useState(props.isLikedByUser);
     const [likeCount, setLikeCount] = useState(props.likeCount);
+    const [retweetCount, setRetweetCount] = useState(props.retweets.length)
     const postId = props.postId;
     const userId = getUserId();
 
     function handlePostProfileClick() {
         navigate('/profile/' + props.data.firebaseUserId);
+    }
+
+    async function handlePostRetweet(){
+        setRetweetCount(retweetCount + 1);
+        await fetch(process.env.REACT_APP_SERVER_URI + 'post/retweet/' + getUserId() + '/' + props.postId)
+            .then((resp)=>{
+                return resp.json()
+            }).then((data)=>{
+                console.log(data);
+            }).catch((err)=>{
+                console.log(err);
+            })
     }
 
     const handleLike = async () => {
@@ -81,9 +94,10 @@ export default function PostSection(props) {
                             <span className="postsCount">{props.commentCount}</span>
                         </span>
                         <span className="postsBottomSection">
-                            <span className="postsBottomSectionIcon">
+                            <span className="postsBottomSectionIcon" onClick={handlePostRetweet}>
                                 <ScreenRotationAltIcon />
                             </span>
+                            <span className="postsCount">{retweetCount}</span>
                         </span>
                         <span className="postsBottomSection">
                             <span className="postsBottomSectionIcon" onClick={handleLike}>
