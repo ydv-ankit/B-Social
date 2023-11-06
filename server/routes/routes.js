@@ -311,7 +311,7 @@ router.post('/post/comment/', async (req, res) => {
       }
     }
   }).then((resp) => {
-    res.status(201).send({ "status": "done" })
+    res.status(201).send({ "status": resp })
   }).catch((err) => {
     console.log(err);
     res.status(500).send({ "status": "server error" })
