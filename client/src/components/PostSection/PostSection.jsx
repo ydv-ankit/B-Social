@@ -33,7 +33,7 @@ export default function PostSection(props) {
             .then((resp) => {
                 return resp.json()
             }).then((data) => {
-                console.log(data);
+                return;
             }).catch((err) => {
                 console.log(err);
             })
@@ -45,7 +45,7 @@ export default function PostSection(props) {
             .then((resp) => {
                 return resp.json()
             }).then((data) => {
-                console.log(data);
+                return;
             }).catch((err) => {
                 console.log(err);
             })

@@ -132,7 +132,7 @@ export default function Sidebar({ userData }) {
               </div>
               <div className="profileText">
                 <div className="profileName">{userData && userData.fullname}</div>
-                <div className="profileUsername">{userData && userData.username}</div>
+                <div className="profileUsername">@{userData && userData.username}</div>
               </div>
             </div>
             <div className="moreOptions">

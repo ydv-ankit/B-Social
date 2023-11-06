@@ -14,7 +14,7 @@ const Main = () => {
     const userId = getUserId();
 
     async function getUserData() {
-        await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + userId)
+        await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
             .then((tmp) => {
                 return tmp.json();
             }).then((data) => {
@@ -25,7 +25,7 @@ const Main = () => {
 
     const handleGetPosts = async () => {
         try {
-            const resp = await fetch(process.env.REACT_APP_SERVER_URI + "posts/all/" + userId);
+            const resp = await fetch(process.env.REACT_APP_SERVER_URI + "posts/all/" + getUserId());
             const posts = await resp.json();
 
             let userIds = [];
