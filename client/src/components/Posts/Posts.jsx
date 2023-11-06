@@ -43,6 +43,7 @@ export default function Posts({ userPosts, userDetails }) {
               commentCount={element.comments.length}
               likeCount={element.likes.length}
               retweets={element.retweets}
+              isRetweeted={element.isRetweeted}
             />
           );
         })

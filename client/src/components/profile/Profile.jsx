@@ -92,7 +92,7 @@ const Profile = ({ userData, userPosts, userDetails, isSameUser, userId }) => {
           </div>
         </div>
         <div className="profileUserPosts">
-          <Posts userPosts={userPosts} userDetails={userDetails} />
+          {userPosts && userDetails && <Posts userPosts={userPosts} userDetails={userDetails} />}
         </div>
       </div>
     </div>

@@ -21,6 +21,10 @@ const PostSchema = new mongoose.Schema(
     },
     retweets: {
       type: Array
+    },
+    isRetweeted: {
+      type: Boolean,
+      default: false
     }
   },
   {

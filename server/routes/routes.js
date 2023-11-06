@@ -186,9 +186,23 @@ router.get("/post/like/:userId/:postId", async (req, res) => {
 
 })
 
+// delete a post
+router.get("/post/delete/:postId", async (req, res) => {
+  await PostModel.deleteOne({_id: req.params.postId})
+    .then((resp)=>{
+      if(resp.deleteCount === 1){
+        res.status(200).send({"deletion":"done"})
+      }else{
+        res.status(200).send({"deletion":"no post found"})
+      }
+    }).catch((err)=>{
+      res.status(500).send({"deletion":"error"})
+    })
+})
+
+// retweet a post
 router.get("/post/retweet/:userId/:postId", async (req, res) => {
   async function createRetweetPost(data) {
-    console.log(data);
     await PostModel.create(data)
       .then(async (resp) => {
         await PostModel.findByIdAndUpdate(req.params.postId, { $push: { retweets: req.params.userId } })
@@ -205,7 +219,7 @@ router.get("/post/retweet/:userId/:postId", async (req, res) => {
     .then((resp) => {
       resp.userId = req.params.userId;
       const { userId, content, images } = resp;
-      createRetweetPost({ userId, content, images });
+      createRetweetPost({ userId, content, images, isRetweeted: true });
       res.status(200).send({ "status": "retweeted" })
     }).catch((err) => {
       res.status(401).send({ "status": "error occured" })

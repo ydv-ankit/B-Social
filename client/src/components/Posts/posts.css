@@ -116,3 +116,7 @@
 .postUserDetailsHover:hover{
   cursor: pointer;
 }
+
+.postsUserDetailsIsRetweeted{
+  color: rgb(250, 250, 142);
+}

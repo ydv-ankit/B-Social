@@ -1,4 +1,4 @@
-import { MoreHorizOutlined } from '@mui/icons-material';
+import { DeleteForever } from '@mui/icons-material';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -19,14 +19,26 @@ export default function PostSection(props) {
         navigate('/profile/' + props.data.firebaseUserId);
     }
 
-    async function handlePostRetweet(){
+    async function handlePostRetweet() {
         setRetweetCount(retweetCount + 1);
         await fetch(process.env.REACT_APP_SERVER_URI + 'post/retweet/' + getUserId() + '/' + props.postId)
-            .then((resp)=>{
+            .then((resp) => {
                 return resp.json()
-            }).then((data)=>{
+            }).then((data) => {
                 console.log(data);
-            }).catch((err)=>{
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+
+    async function handleDeletePost(e) {
+        document.getElementById(props.postId).remove();
+        await fetch(process.env.REACT_APP_SERVER_URI + "post/delete/" + props.postId)
+            .then((resp) => {
+                return resp.json()
+            }).then((data) => {
+                console.log(data);
+            }).catch((err) => {
                 console.log(err);
             })
     }
@@ -63,21 +75,22 @@ export default function PostSection(props) {
     }
 
     return (
-        <div className="posts">
+        <div className="posts" id={props.postId} >
             <div className="postsWrapper">
                 <div className="profileImg" onClick={handlePostProfileClick}>
-                    <img src={props.data.profilePicture} alt="" />
+                    <img src={props.data && props.data.profilePicture} alt="" />
                 </div>
                 <div className="postsContent">
                     <div className="postsUserDetails">
                         <div className='postUserDetailsHover' onClick={handlePostProfileClick}>
                             <span className="postsUserFullname">
-                                {props.data.fullname}
+                                {props.data && props.data.fullname}
                             </span>
                             <span className="postsUserUsername">
-                                @{props.data.username}
+                                @{props.data && props.data.username}
                             </span>
                             <span className="postsUserDetailsSeperator">.</span>
+                            {props.isRetweeted && <span className="postsUserDetailsIsRetweeted">(Reposted)</span>}
                         </div>
                         <div className="postsTopRight">
                             <span className="postsTime">{props.postTime.toString()}</span>
@@ -108,6 +121,15 @@ export default function PostSection(props) {
                             </span>
                             <span className="postsCount">{likeCount}</span>
                         </span>
+                        {props.data && (props.data.firebaseUserId === getUserId()) &&
+                            <span className="postsBottomSection">
+                                <span className="postsBottomSectionIcon" onClick={handleDeletePost}>
+                                    {
+                                        <DeleteForever />
+                                    }
+                                </span>
+                            </span>
+                        }
                     </div>
                 </div>
             </div>
