@@ -190,7 +190,7 @@ router.get("/post/like/:userId/:postId", async (req, res) => {
 router.get("/post/delete/:postId", async (req, res) => {
   await PostModel.deleteOne({_id: req.params.postId})
     .then((resp)=>{
-      if(resp.deleteCount === 1){
+      if(resp.deletedCount === 1){
         res.status(200).send({"deletion":"done"})
       }else{
         res.status(200).send({"deletion":"no post found"})
