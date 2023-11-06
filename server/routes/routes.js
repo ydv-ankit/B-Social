@@ -188,15 +188,15 @@ router.get("/post/like/:userId/:postId", async (req, res) => {
 
 // delete a post
 router.get("/post/delete/:postId", async (req, res) => {
-  await PostModel.deleteOne({_id: req.params.postId})
-    .then((resp)=>{
-      if(resp.deletedCount === 1){
-        res.status(200).send({"deletion":"done"})
-      }else{
-        res.status(200).send({"deletion":"no post found"})
+  await PostModel.deleteOne({ _id: req.params.postId })
+    .then((resp) => {
+      if (resp.deletedCount === 1) {
+        res.status(200).send({ "deletion": "done" })
+      } else {
+        res.status(200).send({ "deletion": "no post found" })
       }
-    }).catch((err)=>{
-      res.status(500).send({"deletion":"error"})
+    }).catch((err) => {
+      res.status(500).send({ "deletion": "error" })
     })
 })
 
@@ -223,6 +223,16 @@ router.get("/post/retweet/:userId/:postId", async (req, res) => {
       res.status(200).send({ "status": "retweeted" })
     }).catch((err) => {
       res.status(401).send({ "status": "error occured" })
+    })
+})
+
+router.get("/post/get/:postId", async (req, res) => {
+  await PostModel.findOne({ _id: req.params.postId })
+    .then((resp) => {
+      res.send(resp);
+    }).catch((err) => {
+      console.log(err);
+      res.status(500).send({ "error": "try again" })
     })
 })
 
@@ -289,5 +299,40 @@ router.get("/users/get/followers/:userId", async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+// comment section
+router.post('/post/comment/', async (req, res) => {
+  const { userId, postId, commentText } = req.body;
+  await PostModel.findByIdAndUpdate(postId, {
+    $push: {
+      comments: {
+        userId: userId,
+        comment: commentText
+      }
+    }
+  }).then((resp) => {
+    res.status(201).send({ "status": "done" })
+  }).catch((err) => {
+    console.log(err);
+    res.status(500).send({ "status": "server error" })
+  })
+})
+
+router.post('/post/comment/delete', async (req, res) => {
+  const { userId, postId, commentText } = req.body;
+  await PostModel.findByIdAndUpdate(postId, {
+    $pull: {
+      comments: {
+        userId: userId,
+        comment: commentText
+      }
+    }
+  }).then((resp) => {
+    res.status(201).send({ "status": "done" })
+  }).catch((err) => {
+    console.log(err);
+    res.status(500).send({ "status": "server error" })
+  })
+})
 
 module.exports = router;
