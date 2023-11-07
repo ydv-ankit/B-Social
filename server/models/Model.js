@@ -25,6 +25,9 @@ const PostSchema = new mongoose.Schema(
     isRetweeted: {
       type: Boolean,
       default: false
+    },
+    bookmarks:{
+      type: Array
     }
   },
   {

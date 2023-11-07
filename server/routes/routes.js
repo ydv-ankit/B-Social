@@ -226,6 +226,7 @@ router.get("/post/retweet/:userId/:postId", async (req, res) => {
     })
 })
 
+// get a post
 router.get("/post/get/:postId", async (req, res) => {
   await PostModel.findOne({ _id: req.params.postId })
     .then((resp) => {
@@ -267,6 +268,38 @@ router.get("/users/get/followings/:userId", async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+// bookmarks
+router.get("/post/bookmark/:userId/:postId", async (req, res)=>{
+
+  await PostModel.findById(req.params.postId)
+    .then(async (resp)=>{
+      if(resp.bookmarks.includes(req.params.userId)){
+        await PostModel.findByIdAndUpdate(req.params.postId, {
+          $pull:{
+            bookmarks: req.params.userId
+          }
+        }).then((response)=>{return;})
+        .catch((err)=>{
+          console.log(err);
+          res.status(500).send({"status":"error"})
+        })
+      }else{
+        await PostModel.findByIdAndUpdate(req.params.postId, {
+          $push:{
+            bookmarks: req.params.userId
+          }
+        }).then((response)=>{return;})
+        .catch((err)=>{
+          console.log(err);
+          res.status(500).send({"status":"error"})
+        })
+      }
+      res.status(200).send({"status":"bookmarked"})
+    }).catch((err)=>{
+      res.status(500).send({"status":"error"})
+    })
+})
 
 // get followers
 router.get("/users/get/followers/:userId", async (req, res) => {
