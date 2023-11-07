@@ -34,6 +34,8 @@ export default function Posts({ userPosts, userDetails }) {
             }
           });
 
+          const isBookmark = element.bookmarks.includes(getUserId());
+
           return (
             <PostSection
               key={index}
@@ -47,6 +49,7 @@ export default function Posts({ userPosts, userDetails }) {
               retweets={element.retweets}
               isRetweeted={element.isRetweeted}
               isPostPreview={false}
+              isBookmarked={isBookmark}
             />
           );
         })

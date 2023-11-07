@@ -1,4 +1,4 @@
-import { DeleteForever } from '@mui/icons-material';
+import { BookmarkBorderOutlined, BookmarkOutlined, DeleteForever } from '@mui/icons-material';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -12,6 +12,7 @@ export default function PostSection(props) {
     const [isLiked, setIsLiked] = useState(props.isLikedByUser);
     const [likeCount, setLikeCount] = useState(props.likeCount);
     const [retweetCount, setRetweetCount] = useState(props.retweets.length)
+    const [isBookmarked, setIsBookmarked] = useState(props.isBookmarked);
     const postId = props.postId;
     const userId = getUserId();
 
@@ -48,6 +49,18 @@ export default function PostSection(props) {
                 return;
             }).catch((err) => {
                 console.log(err);
+            })
+    }
+
+    const handleBookmark = async () => {
+        setIsBookmarked(!isBookmarked);
+        await fetch(process.env.REACT_APP_SERVER_URI + "post/bookmark/" + getUserId() + "/" + props.postId)
+            .then((resp) => {
+                return resp.json();
+            }).then((data) => {
+                console.log(data);
+            }).catch((err) => {
+                throw new Error("cannot bookmark");
             })
     }
 
@@ -128,6 +141,15 @@ export default function PostSection(props) {
                                 }
                             </span>
                             <span className="postsCount">{likeCount}</span>
+                        </span>
+                        <span className="postsBottomSection">
+                            <span className="postsBottomSectionIcon" onClick={handleBookmark}>
+                                {
+                                    isBookmarked
+                                        ? <BookmarkOutlined />
+                                        : <BookmarkBorderOutlined />
+                                }
+                            </span>
                         </span>
                         {props.data && (props.data.firebaseUserId === getUserId()) &&
                             <span className="postsBottomSection">
