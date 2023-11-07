@@ -40,7 +40,9 @@ const Comments = (props) => {
 
   if (!userData) {
     return (
-      <Loader />
+      <div className="toCenterLoader">
+        <Loader />
+      </div>
     )
   }
 
