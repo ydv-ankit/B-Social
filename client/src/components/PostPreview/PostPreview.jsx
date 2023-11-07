@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Loader from "../loader/Loader";
 
 const PostPreview = ({ userPostDetails, userPostData }) => {
-    const time = userPostData && getPostTime(userPostData.createdAt) || "error";
+    const time = userPostData ? getPostTime(userPostData.createdAt) : "error";
     const isLiked = userPostData.likes.includes(getUserId()) ? true : false;
     const [userData, setUserData] = useState();
     const [commentText, setCommentText] = useState("");
@@ -114,10 +114,10 @@ const PostPreview = ({ userPostDetails, userPostData }) => {
                 </div>
                 <div className="postPreviewBottom">
                     <div className="postPreviewComments">
-                        {userPostData.comments.length > 0 && userPostData.comments.map((e, _) => (
+                        {userPostData.comments.length > 0 ? userPostData.comments.map((e, _) => (
                             <Comments key={_} unique={_ + 1} userId={e.userId} comment={e.comment} postId={userPostData._id} isPostAdmin={postAdmin} />
                         ))
-                            || <div className="noComments">Be the first to give feedback...</div>
+                            : <div className="noComments">Be the first to give feedback...</div>
                         }
                     </div>
                 </div>

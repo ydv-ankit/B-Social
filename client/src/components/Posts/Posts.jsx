@@ -10,7 +10,9 @@ export default function Posts({ userPosts, userDetails }) {
 
   if (!userDetails || (userPosts.length !== 0 && userDetails && userDetails.length === 0)) {
     return (
-      <Loader />
+      <div className="toCenterLoader">
+        <Loader />
+      </div>
     )
   }
 
