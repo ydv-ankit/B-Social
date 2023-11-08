@@ -270,34 +270,50 @@ router.get("/users/get/followings/:userId", async (req, res) => {
 });
 
 // bookmarks
-router.get("/post/bookmark/:userId/:postId", async (req, res)=>{
+router.get("/post/bookmark/:userId/:postId", async (req, res) => {
 
   await PostModel.findById(req.params.postId)
-    .then(async (resp)=>{
-      if(resp.bookmarks.includes(req.params.userId)){
+    .then(async (resp) => {
+      if (resp.bookmarks.includes(req.params.userId)) {
         await PostModel.findByIdAndUpdate(req.params.postId, {
-          $pull:{
+          $pull: {
             bookmarks: req.params.userId
           }
-        }).then((response)=>{return;})
-        .catch((err)=>{
-          console.log(err);
-          res.status(500).send({"status":"error"})
-        })
-      }else{
+        }).then((response) => { return; })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).send({ "status": "error" })
+          })
+      } else {
         await PostModel.findByIdAndUpdate(req.params.postId, {
-          $push:{
+          $push: {
             bookmarks: req.params.userId
           }
-        }).then((response)=>{return;})
-        .catch((err)=>{
-          console.log(err);
-          res.status(500).send({"status":"error"})
-        })
+        }).then((response) => { return; })
+          .catch((err) => {
+            res.status(500).send({ "status": "error" })
+          })
       }
-      res.status(200).send({"status":"bookmarked"})
-    }).catch((err)=>{
-      res.status(500).send({"status":"error"})
+      res.status(200).send({ "status": "bookmarked" })
+    }).catch((err) => {
+      res.status(500).send({ "status": "server error" })
+    })
+})
+
+// get bookmarked posts
+router.get("/post/get/bookmarks/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  let responseData = [];
+  await PostModel.find()
+    .then((resp) => {
+      resp.map((post) => {
+        if(post.bookmarks.includes(userId)){
+          responseData.push(post);
+        }
+      })
+      res.send({ "data": responseData })
+    }).catch((err) => {
+      res.status(500).send({ "status": "server error" })
     })
 })
 

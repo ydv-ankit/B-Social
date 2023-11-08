@@ -26,7 +26,7 @@ const PostSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    bookmarks:{
+    bookmarks: {
       type: Array
     }
   },
@@ -74,7 +74,25 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+const ChatSchema = new mongoose.Schema(
+  {
+    users: {
+      type: Object
+    },
+    messages: {
+      type: Array
+    },
+    lastMessage: {
+      type: String,
+    }
+  },
+  {
+    timestamps: true,
+  }
+)
+
 const UserModel = new mongoose.model("users", UserSchema);
 const PostModel = new mongoose.model("posts", PostSchema);
+const ChatModel = new mongoose.model("chats", ChatSchema);
 
-module.exports = { UserModel, PostModel };
+module.exports = { UserModel, PostModel, ChatModel };
