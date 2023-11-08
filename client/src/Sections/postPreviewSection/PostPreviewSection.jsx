@@ -12,17 +12,6 @@ const PostPreviewSection = () => {
     const [userData, setUserData] = useState(null);
     const [userDetails, setUserDetails] = useState(null);
 
-    // sidebar data
-    async function getUserData() {
-        await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
-            .then((tmp) => {
-                return tmp.json();
-            }).then((data) => {
-                setUserData(data.data);
-            })
-            .catch((err) => console.log(err));
-    }
-
     // postPreview data
     async function getUserDetails(userIdData) {
         await fetch(process.env.REACT_APP_SERVER_URI + 'users/id/' + userId)
@@ -48,12 +37,11 @@ const PostPreviewSection = () => {
     }
 
     useEffect(() => {
-        getUserData();
         handleGetPosts();
         getUserDetails();
     }, [])
 
-    if (!userData || !userPostData || !userDetails) {
+    if (!userPostData || !userDetails) {
         return (
             <Loader />
         )
@@ -61,9 +49,7 @@ const PostPreviewSection = () => {
 
     return (
         <>
-            <Sidebar userData={userData} />
             <PostPreview userPostDetails={userDetails} userPostData={userPostData} />
-            <Rightbar />
         </>
     )
 }

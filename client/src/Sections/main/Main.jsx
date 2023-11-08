@@ -68,13 +68,11 @@ const Main = () => {
 
     return (
         <>
-            <Sidebar userData={userData} />
             <Home
                 posts={userPosts}
                 userDetails={userDetails}
                 userData={userData}
             />
-            <Rightbar />
         </>
     )
 }

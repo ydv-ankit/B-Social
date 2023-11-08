@@ -1,8 +1,7 @@
+import './posts.css';
 import PostSection from '../PostSection/PostSection';
 import { getUserId } from "../../utils/cookies";
 import { getPostTime } from '../../utils/getPostTime';
-import './posts.css';
-import { useEffect } from 'react';
 import Loader from '../loader/Loader';
 
 export default function Posts({ userPosts, userDetails }) {

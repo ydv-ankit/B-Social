@@ -9,21 +9,10 @@ import { useParams } from 'react-router-dom';
 const ProfileSection = () => {
   const { userId } = useParams();
   const [userPosts, setUserPosts] = useState([]);
-  const [userData, setUserData] = useState(null);
   const [userDetails, setUserDetails] = useState([]);
   const [profileData, setProfileData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const isSameUser = userId === getUserId() ? true : false;
-
-  async function getUserData() {
-    await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
-      .then((tmp) => {
-        return tmp.json();
-      }).then((data) => {
-        setUserData(data.data);
-      })
-      .catch((err) => console.log(err));
-  }
 
   async function getProfileUserData() {
     await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + userId)
@@ -77,7 +66,6 @@ const ProfileSection = () => {
   }
 
   useEffect(() => {
-    getUserData();
     getProfileUserData();
     handleGetPosts();
   }, [userId])
@@ -90,9 +78,7 @@ const ProfileSection = () => {
 
   return (
     <>
-      <Sidebar userData={userData} />
       <Profile userData={profileData} userPosts={userPosts} userDetails={userDetails} isSameUser={isSameUser} userId={userId} />
-      <Rightbar />
     </>
   )
 }

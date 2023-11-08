@@ -14,6 +14,7 @@ const PostPreview = ({ userPostDetails, userPostData }) => {
     const [commentText, setCommentText] = useState("");
     const [commentBtn, setCommentBtn] = useState(false);
     const postAdmin = userPostDetails.firebaseUserId === getUserId() ? true : false;
+    
     async function getUserData() {
         await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
             .then((tmp) => {
@@ -53,7 +54,7 @@ const PostPreview = ({ userPostDetails, userPostData }) => {
 
     useEffect(() => {
         getUserData();
-    }, [])
+    }, [setCommentText])
 
     if (!userData) {
         return (

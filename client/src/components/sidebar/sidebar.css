@@ -36,6 +36,7 @@
 }
 
 .sidebarLinkText {
+  width: 100%;
   cursor: pointer;
 }
 
@@ -60,7 +61,7 @@
 
 .postText {
   background-color: rgb(29, 155, 240);
-  width: 92%;
+  /* width: 92%; */
   padding: 14px 0;
   text-align: center;
   font-weight: 800;
@@ -137,4 +138,9 @@
 
 .popUpText:hover {
   background-color: grey;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }

@@ -7,24 +7,41 @@ import ProfileSection from "./Sections/profileSection/ProfileSection";
 import FollowersSection from "./Sections/FollowersSection/FollowersSection";
 import FollowingsSection from "./Sections/FollowingsSection/FollowingsSection";
 import PostPreviewSection from "./Sections/postPreviewSection/PostPreviewSection";
+import Bookmarks from "./components/Bookmarks/Bookmarks";
+import { getUserId } from "./utils/cookies";
+import { useEffect, useState } from "react";
+import Sidebar from "./components/sidebar/Sidebar";
+import Rightbar from "./components/rightbar/Rightbar";
 
 export default function App() {
+  const isLoggedIn = (getUserId() === null || getUserId() === 'null') ? false : true;
+  const [userData, setUserData] = useState(null);
+
+  async function getUserData() {
+    await fetch(process.env.REACT_APP_SERVER_URI + "users/id/" + getUserId())
+      .then((tmp) => {
+        return tmp.json();
+      }).then((data) => {
+        setUserData(data.data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getUserData();
+    }
+  }, [isLoggedIn])
+
   return (
     <>
       <div className="container">
         <BrowserRouter>
+          {isLoggedIn && <Sidebar userData={userData} />}
           <Routes>
             {/* authentication route */}
-            <Route path="/" element={<AuthPage />} />
+            <Route path="/" element={isLoggedIn ? <Main /> : <AuthPage />} />
             <Route path="/login" element={<AuthPage />} />
-            {/* home route */}
-            <Route
-              exact
-              path="/home"
-              element={
-                <Main />
-              }
-            />
             {/* explore route */}
             <Route
               exact
@@ -32,6 +49,11 @@ export default function App() {
               element={
                 <ExploreSection />
               }
+            />
+            {/* bookmarks */}
+            <Route
+              path="/bookmarks"
+              element={<Bookmarks />}
             />
             {/* profile page route */}
             <Route
@@ -51,6 +73,7 @@ export default function App() {
               element={<PostPreviewSection />}
             />
           </Routes>
+          {isLoggedIn && <Rightbar />}
         </BrowserRouter>
       </div>
     </>

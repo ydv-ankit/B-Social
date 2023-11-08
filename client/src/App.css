@@ -18,7 +18,7 @@ body {
 }
 
 .sidebar {
-  flex: 3.3;
+  width: 35%;
   overflow-y: scroll;
 }
 
@@ -30,19 +30,24 @@ body {
 .explore,
 .profile,
 .followers,
-.followings {
+.followings,
+.bookmarks {
   overflow-y: scroll;
   border-left: 1px solid rgba(27, 60, 73, 0.775);
   border-right: 1px solid rgba(27, 60, 73, 0.775);
-  flex: 3.4;
+  width: 30%;
 }
 
 .rightbar {
   overflow-y: scroll;
-  flex: 3.96;
+  width: 25%;
 }
 
-.toCenterLoader{
+.toCenterLoader {
   text-align: center;
   margin: 30px 0;
+}
+
+.loader {
+  width: 30%;
 }

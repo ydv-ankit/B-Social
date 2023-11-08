@@ -27,7 +27,7 @@ export default function AuthPage() {
 
   useEffect(() => {
     if (loginStatus) {
-      navigate('/home');
+      navigate('/');
     }
   }, [navigate, loginStatus])
 

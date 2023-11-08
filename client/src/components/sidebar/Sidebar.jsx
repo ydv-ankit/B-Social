@@ -3,30 +3,35 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import {
   BookmarkBorderOutlined,
   MoreHorizOutlined,
-  PeopleOutlined,
   PersonOutlineOutlined,
   Search,
 } from "@mui/icons-material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import TableRowsIcon from "@mui/icons-material/TableRows";
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getUserId, removeCookies } from '../../utils/cookies';
 
 import "./sidebar.css";
 import { useEffect } from "react";
 
+const ROUTES = {
+  HOME: "/",
+  EXPLORE: "/explore",
+  NOTIFICATIONS: "/notifications",
+  MESSAGES: "/messages",
+  BOOKMARKS: "/bookmarks",
+  PROFILE: "/profile/" + getUserId()
+};
+
 export default function Sidebar({ userData }) {
-  const navigate = useNavigate();
 
   function handleBottomLinkClickLogOut(e) {
     document.getElementById("sidebarPopUp").style.display = "none";
     removeCookies("userId");
-    navigate("/");
   }
 
   function handleBottomLinkClickProfile(e) {
     document.getElementById("sidebarPopUp").style.display = "none";
-    navigate("/profile/" + getUserId());
   }
 
   function handleProfileClick(e) {
@@ -37,7 +42,6 @@ export default function Sidebar({ userData }) {
 
   useEffect(() => {
     if (getUserId() === null || getUserId() === "null") {
-      navigate("/");
     }
   }, [])
 
@@ -53,7 +57,7 @@ export default function Sidebar({ userData }) {
               <div className="sidebarImg">
                 <HomeIcon />
               </div>
-              <div className="sidebarLinkText" onClick={() => navigate('/home')}>Home</div>
+              <div className="sidebarLinkText" ><Link to={ROUTES.HOME}>Home</Link></div>
             </div>
           </div>
           <div className="sidebarLinks">
@@ -61,7 +65,7 @@ export default function Sidebar({ userData }) {
               <div className="sidebarImg">
                 <Search />
               </div>
-              <div className="sidebarLinkText" onClick={() => navigate('/explore')}>Explore</div>
+              <div className="sidebarLinkText" ><Link to={ROUTES.EXPLORE}>Explore</Link></div>
             </div>
           </div>
           <div className="sidebarLinks">
@@ -69,7 +73,7 @@ export default function Sidebar({ userData }) {
               <div className="sidebarImg">
                 <NotificationsNoneIcon />
               </div>
-              <div className="sidebarLinkText" onClick={() => navigate('/notifications')}>Notifications</div>
+              <div className="sidebarLinkText" ><Link to={ROUTES.NOTIFICATIONS}>Notifications</Link></div>
             </div>
           </div>
           <div className="sidebarLinks">
@@ -77,15 +81,7 @@ export default function Sidebar({ userData }) {
               <div className="sidebarImg">
                 <MailOutlineIcon />
               </div>
-              <div className="sidebarLinkText" onClick={() => navigate('/messages')}>Messages</div>
-            </div>
-          </div>
-          <div className="sidebarLinks">
-            <div className="sidebarLinkContent">
-              <div className="sidebarImg">
-                <TableRowsIcon />
-              </div>
-              <div className="sidebarLinkText">Lists</div>
+              <div className="sidebarLinkText" ><Link to={ROUTES.MESSAGES}>Messages</Link></div>
             </div>
           </div>
           <div className="sidebarLinks">
@@ -93,15 +89,7 @@ export default function Sidebar({ userData }) {
               <div className="sidebarImg">
                 <BookmarkBorderOutlined />
               </div>
-              <div className="sidebarLinkText" onClick={() => navigate('/bookmarks')}>Bookmarks</div>
-            </div>
-          </div>
-          <div className="sidebarLinks">
-            <div className="sidebarLinkContent">
-              <div className="sidebarImg">
-                <PeopleOutlined />
-              </div>
-              <div className="sidebarLinkText">Communities</div>
+              <div className="sidebarLinkText" ><Link to={ROUTES.BOOKMARKS}>Bookmarks</Link></div>
             </div>
           </div>
           <div className="sidebarLinks">
@@ -109,19 +97,15 @@ export default function Sidebar({ userData }) {
               <div className="sidebarImg">
                 <PersonOutlineOutlined />
               </div>
-              <div className="sidebarLinkText" onClick={() => navigate('/profile/' + getUserId())}>Profile</div>
+              <div className="sidebarLinkText" ><Link to={ROUTES.PROFILE}>Profile</Link></div>
             </div>
           </div>
           <div className="sidebarLinks">
-            <div className="sidebarLinkContent">
-              <div className="sidebarImg moreImg">
-                <MoreHorizOutlined />
+            <div className="sidebarLinkText" >
+              <div className="postText">
+                <Link to={ROUTES.NEWPOST}>POST</Link>
               </div>
-              <div className="sidebarLinkText">More</div>
             </div>
-          </div>
-          <div className="sidebarLinks">
-            <div className="sidebarLinkText postText" onClick={() => navigate('/newpost')}>Post</div>
           </div>
         </div>
         <div className="sidebarBottomLinks" onClick={handleProfileClick}>
