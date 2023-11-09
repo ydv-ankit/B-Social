@@ -5,7 +5,7 @@ import Loader from "../loader/Loader";
 
 const Bookmarks = () => {
   const [bookmarksData, setBookmarksData] = useState([]);
-  const [userDetails, setUserDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState(null);
 
   const getBookmarks = async () => {
     await fetch(process.env.REACT_APP_SERVER_URI + "post/get/bookmarks/" + getUserId())
@@ -37,11 +37,11 @@ const Bookmarks = () => {
 
   console.log(userDetails);
 
-  // if (userDetails.length === 0) {
-  //   return (
-  //     <Loader />
-  //   )
-  // }
+  if (userDetails === null) {
+    return (
+      <Loader />
+    )
+  }
 
   return (
     <div className="bookmarks">
