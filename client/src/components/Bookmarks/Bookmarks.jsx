@@ -33,9 +33,7 @@ const Bookmarks = () => {
 
   useEffect(() => {
     getBookmarks();
-  }, [])
-
-  console.log(userDetails);
+  }, []);
 
   if (userDetails === null) {
     return (
