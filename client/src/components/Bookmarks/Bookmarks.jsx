@@ -44,7 +44,7 @@ const Bookmarks = () => {
   return (
     <div className="bookmarks">
       {
-        bookmarksData.length > 0
+        bookmarksData && bookmarksData?.length > 0
         ? <Posts userDetails={userDetails} userPosts={bookmarksData} />
         : <div className="nodata">Go & save some bookmarks</div>
       }
